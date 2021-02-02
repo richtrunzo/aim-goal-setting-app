@@ -1,0 +1,40 @@
+.text {
+  color: #fafafa;
+  font-size: 50px;
+  font-family: 'Fira Sans', sans-serif;
+
+}
+.text-two {
+   color: #fafafa;
+   font-size: 25px;
+   font-family: 'Mukta Vaani', sans-serif;
+
+}
+
+.text-three {
+   color: #fafafa;
+   font-size: medium;
+   font-family: 'Mukta Vaani', sans-serif;
+   font-size: 18px;
+
+}
+
+.text-four {
+   color: #fafafa;
+   font-size: small;
+   font-family: 'Mukta Vaani', sans-serif;
+   font-size: 14px;
+}
+
+.blue {
+  background-color: #BADEFC;
+}
+
+.white {
+  background-color: #f5f5dc;
+
+}
+
+.orange {
+  background-color: #F2A359;
+}
