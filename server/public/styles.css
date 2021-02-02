@@ -38,3 +38,22 @@
 .orange {
   background-color: #F2A359;
 }
+
+.orange-text {
+  color: #F2A359
+}
+
+.icon-one {
+  font-size: 50px;
+}
+.icon-two {
+  font-size: 25px;
+}
+
+.icon-three {
+  font-size: 18px;
+}
+
+.icon-four {
+  font-size: 14px;
+}

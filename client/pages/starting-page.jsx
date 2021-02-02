@@ -10,7 +10,7 @@ export default function Start(props) {
         <p className="text-two text-center">Welcome to AIM<br></br>the app that tracks your goals</p>
       </div>
       <div>
-          <button className="btn-lg yellow position-absolute top-50 start-50 translate-middle orange text">Try it out!</button>
+        <a href="#home"><button className="btn-lg yellow position-absolute top-50 start-50 translate-middle orange text">Try it out!</button></a>
       </div>
    </div>
   );
