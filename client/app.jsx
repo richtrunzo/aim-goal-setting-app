@@ -26,7 +26,10 @@ export default class App extends React.Component {
       console.log(this.state);
       return <Start />;
     } else if (this.state.route.path === 'home') {
-      return <Header />;
+      return <>
+              <Header />
+              <Home />;
+            </>;
     }
   }
 

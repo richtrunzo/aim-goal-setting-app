@@ -57,3 +57,17 @@
 .icon-four {
   font-size: 14px;
 }
+
+.width {
+  width: 50%
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.plus {
+  position: absolute;
+}
