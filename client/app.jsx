@@ -18,12 +18,10 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
-    console.log(this.state);
   }
 
   renderPage() {
     if (this.state.route.path === '') {
-      console.log(this.state);
       return <Start />;
     } else if (this.state.route.path === 'home') {
       return <>
@@ -34,7 +32,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <React.Fragment >
         {this.renderPage()}
