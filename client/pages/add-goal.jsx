@@ -95,7 +95,7 @@ export default class Addgoal extends React.Component {
               </div>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary orange mt-5" type="button">Save</button>
+              <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOff}>Save</button>
             </div>
           </div>
         </>;
@@ -109,7 +109,7 @@ export default class Addgoal extends React.Component {
               <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary orange mt-5" type="button">Pick an Image</button>
+              <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
               <button className="btn btn-primary orange mt-5" type="button">Save</button>
