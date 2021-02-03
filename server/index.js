@@ -15,14 +15,12 @@ const jsonMiddleWare = express.json();
 
 app.use(jsonMiddleWare);
 
-app.post('/api/users', (req, res) => {
-  const { username, password } = req.body;
+app.get('/api/users', (req, res) => {
   const sql = `
-  insert into "users" ("userName", "password")
-  values ($1, $2)
-  returning *`;
-  const params = [username, password];
-  db.query(sql, params)
+  select "userName", "password"
+  from "users"
+  where "userId" = '1'`;
+  db.query(sql)
     .then(result => {
       const [user] = result.rows;
       res.status(201).json(user);
