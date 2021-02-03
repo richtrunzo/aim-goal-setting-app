@@ -73,7 +73,7 @@ export default class Addgoal extends React.Component {
                       <i className="fab fa-github icon-one hover"></i>
                     </div>
                     <div>
-                      <i className="fab fa-pray icon-one hover"></i>
+                      <i className="fas fa-pray icon-one hover"></i>
                     </div>
                     <div>
                       <i className="fas fa-money-bill-alt icon-one hover"></i>
@@ -87,10 +87,10 @@ export default class Addgoal extends React.Component {
                       <i className="fas fa-capsules icon-one hover"></i>
                     </div>
                     <div>
-                      <i className="far fa-futbol icon-one hover"></i>
+                      <i className="fas fa-futbol icon-one hover"></i>
                     </div>
                     <div>
-                      <i className="far fa-guitar icon-one hover"></i>
+                      <i className="fas fa-guitar icon-one hover"></i>
                     </div>
               </div>
             </div>
