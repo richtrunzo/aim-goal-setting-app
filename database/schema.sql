@@ -2,11 +2,12 @@ set client_min_messages to warning;
 
 -- DANGER: this is NOT how to do it in the real world.
 -- `drop schema` INSTANTLY ERASES EVERYTHING.
+
 CREATE TABLE "users" (
 	"userId" serial NOT NULL,
 	"userName" VARCHAR(255) NOT NULL,
 	"password" VARCHAR(255) NOT NULL,
-	"createdAt" TIMESTAMP NOT NULL,
+	"createdAt" TIMESTAMP NOT NULL default now(),
 	CONSTRAINT "users_pk" PRIMARY KEY ("userId")
 ) WITH (
   OIDS=FALSE
@@ -40,7 +41,7 @@ CREATE TABLE "dailynotes" (
 
 CREATE TABLE "completedgoals" (
 	"goalId" integer NOT NULL,
-	"timeCompleted" TIMESTAMP NOT NULL,
+	"timeCompleted" TIMESTAMP NOT NULL default now(),
 	CONSTRAINT "completedgoals_pk" PRIMARY KEY ("goalId")
 ) WITH (
   OIDS=FALSE
