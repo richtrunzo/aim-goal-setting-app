@@ -34,7 +34,6 @@ export default class Addgoal extends React.Component {
         modal: this.state.modal,
         image: event.target.className
       });
-      console.log(this.state);
     }
   }
 
