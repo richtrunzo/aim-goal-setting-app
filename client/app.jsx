@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './pages/home';
 import Header from './components/header';
 import Start from './pages/starting-page';
+import Addgoal from './pages/add-goal';
 import parseRoute from './lib/parse-route';
 
 export default class App extends React.Component {
@@ -28,6 +29,11 @@ export default class App extends React.Component {
               <Header />
               <Home />;
             </>;
+    } else if (this.state.route.path === 'addgoal') {
+      return <>
+              <Header />
+              <Addgoal />
+             </>;
     }
   }
 
