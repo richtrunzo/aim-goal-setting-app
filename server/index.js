@@ -62,13 +62,14 @@ app.post('/api/goals', (req, res) => {
 app.get('/api/goals/:userId', (req, res) => {
   const userId = req.params.userId;
   const sql = `
-  select "goalName", "image"
+  select *
   from "dailygoals"
   where "userId" = $1`;
   const params = [userId];
   db.query(sql, params)
     .then(result => {
-      const [goal] = result.rows;
+      console.log(result);
+      const goal = [...result.rows];
       res.status(201).json(goal);
     })
     .catch(err => {

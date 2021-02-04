@@ -158,7 +158,7 @@ export default class Addgoal extends React.Component {
                 <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
               </div>
               <div className="col-6 mx-auto text-center mt-5">
-                <i className={this.state.image}></i>;
+                <i className={this.state.image}></i>
               </div>
               <div className="d-grid gap-2 col-6 mx-auto">
           <button className="btn btn-primary orange mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
