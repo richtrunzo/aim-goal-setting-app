@@ -86,3 +86,7 @@
   left: 5%;
   border-radius: 1rem;
 }
+.settings-btn {
+  height: 100%;
+  width: 90%
+}
