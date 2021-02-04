@@ -59,6 +59,26 @@ app.post('/api/goals', (req, res) => {
     });
 });
 
+app.get('/api/goals/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const sql = `
+  select "goalName", "image"
+  from "dailygoals"
+  where "userId" = $1`;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      const [goal] = result.rows;
+      res.status(201).json(goal);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);

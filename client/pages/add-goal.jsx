@@ -42,7 +42,6 @@ export default class Addgoal extends React.Component {
 
   onHandleChange() {
     this.setState({ name: event.target.value });
-    console.log(this.state);
   }
 
   postGoal() {
