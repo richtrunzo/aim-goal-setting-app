@@ -19,15 +19,11 @@ export default class Home extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         const arr = [...this.state.goals];
-        console.log(arr);
         for (let i = 0; i < data.length; i++) {
           arr.push(data[i]);
         }
-        console.log(arr);
         this.setState({ goals: arr });
-        console.log(this.state);
       });
   }
 

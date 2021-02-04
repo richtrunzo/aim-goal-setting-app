@@ -68,7 +68,6 @@ app.get('/api/goals/:userId', (req, res) => {
   const params = [userId];
   db.query(sql, params)
     .then(result => {
-      console.log(result);
       const goal = [...result.rows];
       res.status(201).json(goal);
     })
