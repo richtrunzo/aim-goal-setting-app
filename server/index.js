@@ -15,14 +15,12 @@ const jsonMiddleWare = express.json();
 
 app.use(jsonMiddleWare);
 
-app.post('/api/users', (req, res) => {
-  const { username, password } = req.body;
+app.get('/api/users', (req, res) => {
   const sql = `
-  insert into "users" ("userName", "password")
-  values ($1, $2)
-  returning *`;
-  const params = [username, password];
-  db.query(sql, params)
+  select "userName", "password", "userId"
+  from "users"
+  where "userId" = '1'`;
+  db.query(sql)
     .then(result => {
       const [user] = result.rows;
       res.status(201).json(user);
@@ -31,6 +29,52 @@ app.post('/api/users', (req, res) => {
       console.error(err);
       res.status(500).json({
         error: 'an unexpected error occured'
+      });
+    });
+});
+
+app.post('/api/goals', (req, res) => {
+  const { userId, goalName, goalImage, goalCount = 0 } = req.body;
+  if (goalName === ' ' || goalName === null || goalImage === null) {
+    res.status(400).json({
+      error: 'goalName and goalImage are both required inputs'
+    });
+    return;
+  }
+  const sql = `
+  insert into "dailygoals" ("userId", "goalName", "image", "goalCount")
+  values ($1, $2, $3, $4)
+  returning *`;
+  const params = [userId, goalName, goalImage, goalCount];
+  db.query(sql, params)
+    .then(result => {
+      const [goal] = result.rows;
+      res.status(201).json(goal);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.get('/api/goals/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const sql = `
+  select *
+  from "dailygoals"
+  where "userId" = $1`;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      const goal = [...result.rows];
+      res.status(201).json(goal);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
       });
     });
 });

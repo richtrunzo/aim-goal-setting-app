@@ -5,13 +5,16 @@ export default class Addgoal extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      image: null
+      image: null,
+      name: null
     };
     this.modalOn = this.modalOn.bind(this);
     this.modalOff = this.modalOff.bind(this);
     this.modalRender = this.modalRender.bind(this);
     this.page = this.page.bind(this);
     this.imageRender = this.imageRender.bind(this);
+    this.onHandleChange = this.onHandleChange.bind(this);
+    this.postGoal = this.postGoal.bind(this);
   }
 
   modalOn() {
@@ -35,6 +38,31 @@ export default class Addgoal extends React.Component {
         image: event.target.className
       });
     }
+  }
+
+  onHandleChange() {
+    this.setState({ name: event.target.value });
+  }
+
+  postGoal() {
+    const user = localStorage.getItem('user-information');
+    const userData = JSON.parse(user);
+
+    const newGoal = {
+      goalName: this.state.name,
+      goalImage: this.state.image,
+      userId: userData.userId
+    };
+
+    fetch('/api/goals', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newGoal)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
   }
 
   modalRender() {
@@ -124,29 +152,29 @@ export default class Addgoal extends React.Component {
       return <div>
               <div className="input-group input-group-lg mt-5">
                 <span className="input-group-text orange" id="inputGroup-sizing-md">Name Your Goal</span>
-                <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
+          <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange} />
               </div>
               <div className="d-grid gap-2 col-6 mx-auto">
                 <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
               </div>
               <div className="col-6 mx-auto text-center mt-5">
-                <i className={this.state.image}></i>;
+                <i className={this.state.image}></i>
               </div>
               <div className="d-grid gap-2 col-6 mx-auto">
-                <button className="btn btn-primary orange mt-5" type="button">Save</button>
+          <button className="btn btn-primary orange mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
               </div>
             </div>;
     } else {
       return <div>
             <div className="input-group input-group-lg mt-5">
               <span className="input-group-text orange" id="inputGroup-sizing-md">Name Your Goal</span>
-              <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
+          <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange}/>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
               <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary orange mt-5" type="button">Save</button>
+          <button className="btn btn-primary orange mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
             </div>
           </div>;
     }
