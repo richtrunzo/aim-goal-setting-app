@@ -6,6 +6,7 @@ export default class Edit extends React.Component {
     this.state = {
       goals: [],
       editModal: false,
+      deleteModal: false,
       goalId: null,
       image: null,
       goalName: null
@@ -16,6 +17,7 @@ export default class Edit extends React.Component {
     this.nameChange = this.nameChange.bind(this);
     this.imageChange = this.imageChange.bind(this);
     this.editGoals = this.editGoals.bind(this);
+    this.deleteModalOn = this.deleteModalOn.bind(this);
   }
 
   componentDidMount() {
@@ -38,10 +40,23 @@ export default class Edit extends React.Component {
     this.setState({
       goals: this.state.goals,
       editModal: true,
+      deleteModal: this.state.deleteModal,
       goalId: event.target.id,
       image: this.state.image,
       goalName: this.state.goalname
     });
+  }
+
+  deleteModalOn() {
+    this.setState({
+      goals: this.state.goals,
+      editModal: this.editModalOn,
+      deleteModal: true,
+      goalId: event.target.id,
+      image: this.state.image,
+      goalName: this.state.goalname
+    });
+
   }
 
   nameChange() {
@@ -104,7 +119,7 @@ export default class Edit extends React.Component {
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
               <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange" onClick={this.editModalOn}>Edit</button>
-              <button type="button" className="btn btn-primary btn-sm red">Delete</button>
+              <button id={value.goalId} type="button" className="btn btn-primary btn-sm red" onClick={this.deleteModalOn}>Delete</button>
             </div>
           </div>;
         })
@@ -112,6 +127,38 @@ export default class Edit extends React.Component {
       </div>
     </div>;
 
+  }
+
+  deleteModalRender() {
+    return <>
+            <div className="mode"></div>
+            <div>
+              <div className="d-flex justify-content-between flex-wrap">
+              {this.state.goals.map((value, index) => {
+                return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
+                        <div className="mx-auto circle white border border-dark border-3">
+                          <i className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
+                        </div>
+                        <p className="text-center text-two">{value.goalName}</p>
+                        <div className="d-flex justify-content-around">
+                          <button type="button" className=" px-3 btn btn-primary btn-sm orange">Edit</button>
+                          <button type="button" className="btn btn-primary btn-sm red">Delete</button>
+                        </div>
+                      </div>;
+              })
+                        }
+        <div className="filter">
+           <h1 className="text-two orange-text mt-2 px-5 text-center">Are you sure you want to delete this goal?</h1>
+          <div className="d-grid gap-2 mt-5">
+            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button">No, go back</button>
+          </div>
+          <div className="d-grid gap-2 mt-5">
+            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button">Yes, delete</button>
+          </div>
+          </div>
+        </div>
+      </div>
+      </>;
   }
 
   editModalRender() {
