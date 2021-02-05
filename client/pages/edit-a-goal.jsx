@@ -18,6 +18,7 @@ export default class Edit extends React.Component {
     this.imageChange = this.imageChange.bind(this);
     this.editGoals = this.editGoals.bind(this);
     this.delete = this.delete.bind(this);
+    this.deleteGoals = this.deleteGoals.bind(this);
   }
 
   componentDidMount() {
@@ -162,7 +163,7 @@ export default class Edit extends React.Component {
               <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button"><a href="#edit">No, go back</a></button>
           </div>
           <div className="d-grid gap-2 mt-5">
-            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}>Yes, delete</button>
+            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}><a href="#home">Yes, delete</a></button>
           </div>
           </div>
         </div>
