@@ -15,6 +15,7 @@ export default class Edit extends React.Component {
     this.editModalOn = this.editModalOn.bind(this);
     this.nameChange = this.nameChange.bind(this);
     this.imageChange = this.imageChange.bind(this);
+    this.editGoals = this.editGoals.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +54,6 @@ export default class Edit extends React.Component {
         goalName: event.target.value
       });
     }
-    console.log(this.state);
   }
 
   imageChange() {
@@ -66,7 +66,25 @@ export default class Edit extends React.Component {
         goalName: this.state.goalName
       });
     }
-    console.log(this.state);
+  }
+
+  editGoals() {
+    const goalId = this.state.goalId;
+    const editGoal = {
+      goalName: this.state.goalName,
+      goalImage: this.state.image
+    };
+    if (this.state.image !== null && this.state.goalName !== null) {
+      fetch(`/api/goals/${goalId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editGoal)
+      })
+        .then(res => res.json())
+        .then(data => console.log(data));
+    }
   }
 
   noGoalsRender() {
@@ -184,7 +202,7 @@ export default class Edit extends React.Component {
         </div>
       </div>
       <div className="d-grid gap-2 col-6 mx-auto">
-        <button className="btn btn-primary orange mt-5" type="button">Save</button>
+          <button className="btn btn-primary orange mt-5" type="button" onClick={this.editGoals}><a href="#home">Save</a></button>
       </div>
     </div>
     </>;
