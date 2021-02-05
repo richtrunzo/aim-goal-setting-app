@@ -17,7 +17,7 @@ export default class Edit extends React.Component {
     this.nameChange = this.nameChange.bind(this);
     this.imageChange = this.imageChange.bind(this);
     this.editGoals = this.editGoals.bind(this);
-    this.deleteModalOn = this.deleteModalOn.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +47,7 @@ export default class Edit extends React.Component {
     });
   }
 
-  deleteModalOn() {
+  delete() {
     this.setState({
       goals: this.state.goals,
       editModal: this.editModalOn,
@@ -56,6 +56,7 @@ export default class Edit extends React.Component {
       image: this.state.image,
       goalName: this.state.goalname
     });
+    console.log(this.state);
 
   }
 
@@ -102,6 +103,14 @@ export default class Edit extends React.Component {
     }
   }
 
+  deleteGoals() {
+    const goalId = this.state.goalId;
+    fetch(`/api/delete/${goalId}`, {
+      method: 'DELETE'
+    })
+      .then(res => res.json());
+  }
+
   noGoalsRender() {
     return <div className="mt-5">
             <h3 className="text-center mt-5 text-one">No Goals Saved</h3>
@@ -119,7 +128,7 @@ export default class Edit extends React.Component {
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
               <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange" onClick={this.editModalOn}>Edit</button>
-              <button id={value.goalId} type="button" className="btn btn-primary btn-sm red" onClick={this.deleteModalOn}>Delete</button>
+              <button id={value.goalId} type="button" className="btn btn-primary btn-sm red" onClick={this.delete}>Delete</button>
             </div>
           </div>;
         })
@@ -150,10 +159,10 @@ export default class Edit extends React.Component {
         <div className="filter">
            <h1 className="text-two orange-text mt-2 px-5 text-center">Are you sure you want to delete this goal?</h1>
           <div className="d-grid gap-2 mt-5">
-            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button">No, go back</button>
+              <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button"><a href="#edit">No, go back</a></button>
           </div>
           <div className="d-grid gap-2 mt-5">
-            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button">Yes, delete</button>
+            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}>Yes, delete</button>
           </div>
           </div>
         </div>
@@ -256,10 +265,13 @@ export default class Edit extends React.Component {
   }
 
   render() {
-    if (this.state.goals.length > 0 && this.state.editModal === false) {
+    console.log(this.state);
+    if (this.state.goals.length > 0 && this.state.editModal === false && this.state.deleteModal === false) {
       return this.goalsRender();
-    } else if (this.state.goals.length > 0 && this.state.editModal === true) {
+    } else if (this.state.goals.length > 0 && this.state.editModal === true && this.state.deleteModal === false) {
       return this.editModalRender();
+    } else if (this.state.goals.length > 0 && this.state.deleteModal === true) {
+      return this.deleteModalRender();
     } else {
       return this.noGoalsRender();
     }
