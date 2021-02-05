@@ -116,6 +116,38 @@ app.delete('/api/delete/:goalId', (req, res) => {
     });
 });
 
+app.post('/api/completedTime', (req, res) => {
+  const { goalId } = req.body;
+  const sql = `
+  insert into "completedgoals" ("goalId")
+  values ($1)
+  returning *`;
+  const params = [goalId];
+  db.query(sql, params)
+    .then(res.status(201))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.get('/api/getTimes', (req, res) => {
+  const sql = 'select * from "completedgoals"';
+  db.query(sql)
+    .then(result => {
+      const times = result.rows;
+      res.status(201).json(times);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
