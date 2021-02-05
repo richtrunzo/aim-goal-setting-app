@@ -58,7 +58,6 @@ export default class Edit extends React.Component {
       image: this.state.image,
       goalName: this.state.goalname
     });
-    console.log(this.state);
 
   }
 
@@ -71,7 +70,6 @@ export default class Edit extends React.Component {
       image: this.state.image,
       goalName: this.state.goalname
     });
-    console.log(this.state);
 
   }
 
@@ -280,7 +278,6 @@ export default class Edit extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     if (this.state.goals.length > 0 && this.state.editModal === false && this.state.deleteModal === false) {
       return this.goalsRender();
     } else if (this.state.goals.length > 0 && this.state.editModal === true && this.state.deleteModal === false) {
