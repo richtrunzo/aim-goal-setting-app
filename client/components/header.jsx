@@ -11,7 +11,7 @@ export default function Header(props) {
               <h3 className="text orange-text">AIM</h3>
             </div>
             <div className="text-center">
-              <i className="fas fa-cog orange-text icon-two pt-3"></i>
+              <a href="#settings"><i className="fas fa-cog orange-text icon-two pt-3"></i></a>
             </div>
         </div>
     </div>

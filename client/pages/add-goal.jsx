@@ -67,6 +67,7 @@ export default class Addgoal extends React.Component {
 
   modalRender() {
     return <>
+      <div className="mode"></div>
           <div>
             <div className="input-group input-group-lg mt-5">
               <span className="input-group-text orange" id="inputGroup-sizing-md">Name Your Goal</span>
