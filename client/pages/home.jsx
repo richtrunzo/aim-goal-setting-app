@@ -34,7 +34,6 @@ export default class Home extends React.Component {
     fetch('/api/getTimes', { method: 'GET' })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         const arr = [...this.state.completed];
         for (let i = 0; i < data.length; i++) {
           arr.push(data[i]);
@@ -148,9 +147,6 @@ export default class Home extends React.Component {
       });
     });
 
-    console.log(combinedState);
-    console.log(this.state.goals);
-    console.log(this.state);
     return <div>
         <div className="d-flex justify-content-between flex-wrap">
           {combinedState.map((value, index) => {
@@ -189,7 +185,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     if (this.state.goals.length > 0) {
       return this.goalsRender();
     } else {
