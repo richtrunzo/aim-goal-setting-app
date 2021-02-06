@@ -96,15 +96,37 @@ export default class Home extends React.Component {
   }
 
   goalsRender() {
+    const combinedState = [...this.state.goals];
+    const completedState = [...this.state.completed];
+
+    combinedState.map((value, index) => {
+      completedState.map((newvalue, newindex) => {
+        if (value.goalId === newvalue.goalId) {
+          combinedState[index].timeCompleted = completedState[newindex].timeCompleted;
+        }
+      });
+    });
+
+    console.log(combinedState);
+    console.log(this.state.goals);
     return <div>
         <div className="d-flex justify-content-between flex-wrap">
-          {this.state.goals.map((value, index) => {
-            return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6" onDoubleClick={this.completeGoal}>
+          {combinedState.map((value, index) => {
+            if (value.timeCompleted === false || value.timeCompleted === undefined) {
+              return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
                       <div className="mx-auto circle white border border-dark border-3">
                         <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`} onClick={this.completeGoal}></i>
                       </div>
                       <p className="text-center text-two">{value.goalName}</p>
                     </div>);
+            } else if (value.timeCompleted === true) {
+              return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
+                <div className="mx-auto circle green border border-dark border-3">
+                  <i id={value.goalId} completed={value.goalCount} className='icon-one position-relative top-50 start-50 translate-middle fas fa-check-circle'></i>
+                </div>
+                <p className="text-center text-two">{value.goalName}</p>
+              </div>);
+            }
           })
           }
             <div className="mt-5 col-6">

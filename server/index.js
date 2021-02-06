@@ -102,12 +102,26 @@ app.patch('/api/goals/:goalId', (req, res) => {
 app.delete('/api/delete/:goalId', (req, res) => {
   const goalId = req.params.goalId;
   const sql = `
-  delete from "dailygoals"
-  where "goalId" = $1
-  returning *`;
+  delete from "completedgoals"
+  where "goalId" = $1`;
   const params = [goalId];
   db.query(sql, params)
-    .then(res.status(201))
+    .then(() => {
+      const newsql = `
+      delete from "dailygoals"
+      where "goalId" = $1
+      `;
+      const newparams = [goalId];
+      db.query(newsql, newparams)
+        .then(res.status(201))
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'an unexpected error occurred'
+          });
+        });
+    }
+    )
     .catch(err => {
       console.error(err);
       res.status(500).json({

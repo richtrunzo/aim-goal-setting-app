@@ -111,3 +111,7 @@ a {
  .chh_ended {
    width: 100%
  }
+
+ .green {
+   background-color: chartreuse;
+ }
