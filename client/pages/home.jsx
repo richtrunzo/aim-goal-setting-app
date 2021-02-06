@@ -6,11 +6,14 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       goals: [],
-      completed: []
+      completed: [],
+      active: null
     };
     this.noGoalsRender = this.noGoalsRender.bind(this);
     this.goalsRender = this.goalsRender.bind(this);
     this.completeGoal = this.completeGoal.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.toggleClass = this.toggleClass.bind(this);
   }
 
   componentDidMount() {
@@ -82,6 +85,16 @@ export default class Home extends React.Component {
     });
   }
 
+  toggleClass() {
+    this.setState({ active: event.target.id });
+  }
+
+  onClick() {
+    this.completeGoal();
+    this.toggleClass();
+
+  }
+
   noGoalsRender() {
     return (<div>
             <div className="d-flex justify-content-between flex-wrap">
@@ -109,20 +122,28 @@ export default class Home extends React.Component {
 
     console.log(combinedState);
     console.log(this.state.goals);
+    console.log(this.state);
     return <div>
         <div className="d-flex justify-content-between flex-wrap">
           {combinedState.map((value, index) => {
-            if (value.timeCompleted === false || value.timeCompleted === undefined) {
+            if (parseInt(this.state.active) === value.goalId) {
               return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
-                      <div className="mx-auto circle white border border-dark border-3">
-                        <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`} onClick={this.completeGoal}></i>
+                <div className="mx-auto circle green border border-dark border-3">
+                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
+                </div>
+                <p className="text-center text-two">{value.goalName}</p>
+              </div>);
+            } else if (value.timeCompleted === false || value.timeCompleted === undefined) {
+              return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
+                <div id={value.goalId} className="mx-auto circle white border border-dark border-3" onClick={this.onClick}>
+                  <i id={value.goalId} name="icon" completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`} onClick={this.onClick}></i>
                       </div>
                       <p className="text-center text-two">{value.goalName}</p>
                     </div>);
             } else if (value.timeCompleted === true) {
               return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
                 <div className="mx-auto circle green border border-dark border-3">
-                  <i id={value.goalId} completed={value.goalCount} className='icon-one position-relative top-50 start-50 translate-middle fas fa-check-circle'></i>
+                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
                 </div>
                 <p className="text-center text-two">{value.goalName}</p>
               </div>);
@@ -140,6 +161,7 @@ export default class Home extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     if (this.state.goals.length > 0) {
       return this.goalsRender();
     } else {
