@@ -72,6 +72,20 @@ export default class Home extends React.Component {
         fetch(`/api/updatecompletedTime/${goalId}`, { method: 'PATCH' })
           .then(res => res.json());
 
+        const counter = value.goalCount + 1;
+        const count = {
+          goalId: goalId,
+          count: counter
+        };
+        fetch('api/goalcount', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(count)
+        })
+          .then(res => res.json());
+
       } else if (parseInt(goalId) === value.goalId && value.goalCount === 0) {
         fetch('/api/completedTime/', {
           method: 'POST',
@@ -79,6 +93,20 @@ export default class Home extends React.Component {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(goalObj)
+        })
+          .then(res => res.json());
+
+        const counter = value.goalCount + 1;
+        const count = {
+          goalId: goalId,
+          count: counter
+        };
+        fetch('api/goalcount', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(count)
         })
           .then(res => res.json());
       }

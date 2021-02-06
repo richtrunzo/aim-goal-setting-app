@@ -162,6 +162,23 @@ app.get('/api/getTimes', (req, res) => {
     });
 });
 
+app.patch('/api/goalcount', (req, res) => {
+  const { goalId, count } = req.body;
+  const sql = `
+  update "dailygoals"
+  set "goalCount" = $1
+  where "goalId" = $2`;
+  const params = [count, goalId];
+  db.query(sql, params)
+    .then(res.status(201))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
