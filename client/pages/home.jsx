@@ -123,7 +123,7 @@ export default class Home extends React.Component {
   }
 
   noGoalsRender() {
-    return (<div>
+    return <div>
             <div className="d-flex justify-content-between flex-wrap">
               <div className="mt-5 col-6">
                 <div className="mx-auto circle white border border-dark border-3">
@@ -131,8 +131,7 @@ export default class Home extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
-    );
+          </div>;
   }
 
   goalsRender() {
@@ -147,7 +146,8 @@ export default class Home extends React.Component {
       });
     });
 
-    return <div>
+    return (
+      <div>
         <div className="d-flex justify-content-between flex-wrap">
           {combinedState.map((value, index) => {
             if (parseInt(this.state.active) === value.goalId) {
@@ -180,8 +180,8 @@ export default class Home extends React.Component {
               </div>
             </div>
       </div>
-    </div>;
-
+    </div>
+    );
   }
 
   render() {
