@@ -1,4 +1,5 @@
 import React from 'react';
+import Today from '../components/date-check';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -15,7 +16,6 @@ export default class Home extends React.Component {
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user-information'));
     const userId = parseInt(user.userId);
-    console.log(userId);
     fetch(`/api/goals/${userId}`, {
       method: 'GET'
     })
@@ -30,20 +30,42 @@ export default class Home extends React.Component {
 
     fetch('/api/getTimes', { method: 'GET' })
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        console.log(data);
+        const arr = [...this.state.completed];
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i]);
+        }
+        for (let i = 0; i < arr.length; i++) {
+          if (Today(arr[i].timeCompleted) > 0) {
+            arr[i].timeCompleted = true;
+          } else if (Today(arr[i].timeComepleted) < 0) {
+            arr[i].timeCompleted = false;
+          }
+        }
+        this.setState({ completed: arr });
+      });
   }
 
   completeGoal() {
     const goalId = event.target.id;
-    const count = event.target.completed;
     const goalObj = {
       goalId: event.target.id
     };
-    console.log(this.state);
-    console.log(goalId);
 
-    this.state.goals.map((value, index) => {
-      if (parseInt(goalId) === value.goalId && value.goalCount > 0) {
+    const combinedState = [...this.state.goals];
+    const completedState = [...this.state.completed];
+
+    combinedState.map((value, index) => {
+      completedState.map((newvalue, newindex) => {
+        if (value.goalId === newvalue.goalId) {
+          combinedState[index].timeCompleted = completedState[newindex].timeCompleted;
+        }
+      });
+    });
+
+    combinedState.map((value, index) => {
+      if (parseInt(goalId) === value.goalId && value.goalCount > 0 && value.timeCompleted === false) {
         fetch(`/api/updatecompletedTime/${goalId}`, { method: 'PATCH' })
           .then(res => res.json());
 
@@ -58,7 +80,6 @@ export default class Home extends React.Component {
           .then(res => res.json());
       }
     });
-
   }
 
   noGoalsRender() {
