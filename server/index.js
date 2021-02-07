@@ -102,10 +102,73 @@ app.patch('/api/goals/:goalId', (req, res) => {
 app.delete('/api/delete/:goalId', (req, res) => {
   const goalId = req.params.goalId;
   const sql = `
-  delete from "dailygoals"
-  where "goalId" = $1
+  delete from "completedgoals"
+  where "goalId" = $1`;
+  const params = [goalId];
+  db.query(sql, params)
+    .then(() => {
+      const newsql = `
+      delete from "dailygoals"
+      where "goalId" = $1
+      `;
+      const newparams = [goalId];
+      db.query(newsql, newparams)
+        .then(res.status(201))
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'an unexpected error occurred'
+          });
+        });
+    }
+    )
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.post('/api/completedTime', (req, res) => {
+  const { goalId } = req.body;
+  const sql = `
+  insert into "completedgoals" ("goalId")
+  values ($1)
   returning *`;
   const params = [goalId];
+  db.query(sql, params)
+    .then(res.status(201))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.get('/api/getTimes', (req, res) => {
+  const sql = 'select * from "completedgoals"';
+  db.query(sql)
+    .then(result => {
+      const times = result.rows;
+      res.status(201).json(times);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.patch('/api/goalcount', (req, res) => {
+  const { goalId, count } = req.body;
+  const sql = `
+  update "dailygoals"
+  set "goalCount" = $1
+  where "goalId" = $2`;
+  const params = [count, goalId];
   db.query(sql, params)
     .then(res.status(201))
     .catch(err => {

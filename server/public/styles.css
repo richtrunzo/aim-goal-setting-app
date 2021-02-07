@@ -108,3 +108,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+ .chh_ended {
+   width: 100%
+ }
+
+ .green {
+   background-color: chartreuse;
+ }
