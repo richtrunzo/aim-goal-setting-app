@@ -1,8 +1,7 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import color from 'rcolor';
 
-const initialState = {
+const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
@@ -17,57 +16,23 @@ const initialState = {
   ]
 };
 
-const Graph = React.createClass({
-  displayName: 'Graph',
-  componentWillMount() {
-    this.setState(initialState);
-  },
-  componentDidMount() {
-
-    const _this = this;
-
-    setInterval(function () {
-      const oldDataSet = _this.state.datasets[0];
-      const newData = [];
-
-      for (let x = 0; x < _this.state.labels.length; x++) {
-        newData.push(Math.floor(Math.random() * 100));
-      }
-
-      const newDataSet = {
-        ...oldDataSet
-      };
-
-      newDataSet.data = newData;
-      newDataSet.backgroundColor = color();
-      newDataSet.borderColor = color();
-      newDataSet.hoverBackgroundColor = color();
-      newDataSet.hoverBorderColor = color();
-
-      const newState = {
-        ...initialState,
-        datasets: [newDataSet]
-      };
-
-      _this.setState(newState);
-    }, 5000);
-  },
-  render() {
-    return (
-      <Bar data={this.state} />
-    );
+export default class Bargraph extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null
+    };
   }
-});
 
-export default React.createClass({
-  displayName: 'Crazy Random Graph',
+  componentDidMount() {
+    this.setState({ data: data });
+  }
 
   render() {
     return (
-      <div>
-        <h2>You can even make crazy graphs like this!</h2>
-        <Graph />
+      <div className="mt-5">
+        <Bar data={this.state.data} />
       </div>
     );
   }
-});
+}

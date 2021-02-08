@@ -1,18 +1,14 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const getState = () => ({
+const data = {
   labels: [
     'Red',
     'Green',
     'Yellow'
   ],
   datasets: [{
-    data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250)],
+    data: [100, 50, 20],
     backgroundColor: [
       '#CCC',
       '#36A2EB',
@@ -24,27 +20,27 @@ const getState = () => ({
       '#FFCE56'
     ]
   }]
-});
+};
 
-export default React.createClass({
-  displayName: 'DynamicDoughnutExample',
+export default class Donut extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null
+    };
+  }
 
-  getInitialState() {
-    return getState();
-  },
-
-  componentWillMount() {
+  componentDidMount() {
     setInterval(() => {
-      this.setState(getState());
-    }, 5000);
-  },
+      this.setState({ data: data });
+    }, 500);
+  }
 
   render() {
     return (
-      <div>
-        <h2>Dynamicly refreshed Doughnut Example</h2>
-        <Doughnut data={this.state} />
+      <div className="mt-5">
+        <Doughnut data={this.state.data} />
       </div>
     );
   }
-});
+}
