@@ -1,14 +1,10 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const data = {
-  labels: [
-    'Red',
-    'Green',
-    'Yellow'
-  ],
+const datachart = {
+  labels: [],
   datasets: [{
-    data: [100, 50, 20],
+    data: [],
     backgroundColor: [
       '#CCC',
       '#36A2EB',
@@ -26,14 +22,31 @@ export default class Donut extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      goals: [],
       data: null
     };
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState({ data: data });
-    }, 500);
+    const user = JSON.parse(localStorage.getItem('user-information'));
+    const userId = parseInt(user.userId);
+    fetch(`/api/goals/${userId}`, {
+      method: 'GET'
+    })
+      .then(res => res.json())
+      .then(data => {
+        const arr = [...this.state.goals];
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i]);
+          datachart.labels.push(data[i].goalName);
+          datachart.datasets[0].data.push(data[i].goalCount);
+        }
+        this.setState({
+          goals: arr,
+          data: datachart
+        });
+      });
+
   }
 
   render() {

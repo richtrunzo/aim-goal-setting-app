@@ -68,7 +68,13 @@ export default class Home extends React.Component {
 
     combinedState.map((value, index) => {
       if (parseInt(goalId) === value.goalId && value.goalCount > 0 && value.timeCompleted === false) {
-        fetch(`/api/updatecompletedTime/${goalId}`, { method: 'PATCH' })
+        fetch('/api/updatecompletedTime', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(goalObj)
+        })
           .then(res => res.json());
 
         const counter = value.goalCount + 1;
