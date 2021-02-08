@@ -5,6 +5,7 @@ import Start from './pages/starting-page';
 import Addgoal from './pages/add-goal';
 import Settings from './pages/settings';
 import Edit from './pages/edit-a-goal';
+import Track from './pages/track-progress';
 import parseRoute from './lib/parse-route';
 
 export default class App extends React.Component {
@@ -46,6 +47,11 @@ export default class App extends React.Component {
               <Header />
               <Edit />
               </>;
+    } else if (this.state.route.path === 'track') {
+      return <>
+              <Header />
+              <Track />
+            </>;
     }
   }
 
