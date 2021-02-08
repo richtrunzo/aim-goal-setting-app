@@ -1,20 +1,13 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import Random from './random-color';
 
 const datachart = {
   labels: [],
   datasets: [{
     data: [],
-    backgroundColor: [
-      '#CCC',
-      '#36A2EB',
-      '#FFCE56'
-    ],
-    hoverBackgroundColor: [
-      '#FF6384',
-      '#36A2EB',
-      '#FFCE56'
-    ]
+    backgroundColor: [],
+    hoverBackgroundColor: []
   }]
 };
 
@@ -40,12 +33,25 @@ export default class Donut extends React.Component {
           arr.push(data[i]);
           datachart.labels.push(data[i].goalName);
           datachart.datasets[0].data.push(data[i].goalCount);
+          const x = Random();
+          datachart.datasets[0].backgroundColor.push(x);
+          const y = Random();
+          datachart.datasets[0].hoverBackgroundColor.push(y);
+
         }
         this.setState({
           goals: arr,
           data: datachart
         });
       });
+
+  }
+
+  componentWillUnmount() {
+    datachart.labels = [];
+    datachart.datasets[0].data = [];
+    datachart.datasets[0].backgroundColor = [];
+    datachart.datasets[0].hoverBackgroundColor = [];
 
   }
 

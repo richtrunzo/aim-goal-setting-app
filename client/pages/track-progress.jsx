@@ -46,7 +46,7 @@ export default class Track extends React.Component {
     if (this.state.current === null) {
       return <div className="d-flex justify-content-around mt-5">
               <button id="bar" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Bar Chart</button>
-              <button id="line" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Line Graph</button>
+              <button id="polar" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Polar Graph</button>
               <button id="doghnut" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Doghnut</button>
             </div>;
 

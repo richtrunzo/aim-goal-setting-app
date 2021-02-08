@@ -1,16 +1,11 @@
 import React from 'react';
 import { Polar } from 'react-chartjs-2';
+import Random from './random-color';
 
 const datachart = {
   datasets: [{
     data: [],
-    backgroundColor: [
-      '#FF6384',
-      '#4BC0C0',
-      '#FFCE56',
-      '#E7E9ED',
-      '#36A2EB'
-    ],
+    backgroundColor: [],
     label: 'My goals'
   }],
   labels: []
@@ -38,6 +33,8 @@ export default class Polarchart extends React.Component {
           arr.push(data[i]);
           datachart.labels.push(data[i].goalName);
           datachart.datasets[0].data.push(data[i].goalCount);
+          const x = Random();
+          datachart.datasets[0].backgroundColor.push(x);
         }
         this.setState({
           goals: arr,
@@ -49,6 +46,8 @@ export default class Polarchart extends React.Component {
   componentWillUnmount() {
     datachart.labels = [];
     datachart.datasets[0].data = [];
+    datachart.datasets[0].backgroundColor = [];
+
   }
 
   render() {

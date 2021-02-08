@@ -5,13 +5,13 @@ export default function Header(props) {
       <div className="container header white">
         <div className="d-flex justify-content-around">
              <div className="text-center">
-              <a href="#home"><i className="fas fa-home orange-text icon-two pt-3"></i></a>
+              <a href="#home"><i className="fas fa-home orange-text icon-one pt-2"></i></a>
             </div>
             <div className="text text-center">
               <h3 className="text orange-text">AIM</h3>
             </div>
             <div className="text-center">
-              <a href="#settings"><i className="fas fa-cog orange-text icon-two pt-3"></i></a>
+              <a href="#settings"><i className="fas fa-cog orange-text icon-one pt-2"></i></a>
             </div>
         </div>
     </div>
