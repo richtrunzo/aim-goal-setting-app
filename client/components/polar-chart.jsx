@@ -46,6 +46,11 @@ export default class Polarchart extends React.Component {
       });
   }
 
+  componentWillUnmount() {
+    datachart.labels = [];
+    datachart.datasets[0].data = [];
+  }
+
   render() {
     return (
       <div className="mt-5">
