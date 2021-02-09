@@ -196,6 +196,23 @@ where "goalId" = $1`;
     });
 });
 
+app.post('/api/notes', (req, res) => {
+  const { goalId, note } = req.body;
+  const sql = `
+  insert into "dailynotes" ("goalId", "note")
+  values ($1, $2)
+  returning *`;
+  const params = [goalId, note];
+  db.query(sql, params)
+    .then(res.status(201))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
