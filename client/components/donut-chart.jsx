@@ -1,24 +1,13 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import Random from './random-color';
 
-const data = {
-  labels: [
-    'Red',
-    'Green',
-    'Yellow'
-  ],
+const datachart = {
+  labels: [],
   datasets: [{
-    data: [100, 50, 20],
-    backgroundColor: [
-      '#CCC',
-      '#36A2EB',
-      '#FFCE56'
-    ],
-    hoverBackgroundColor: [
-      '#FF6384',
-      '#36A2EB',
-      '#FFCE56'
-    ]
+    data: [],
+    backgroundColor: [],
+    hoverBackgroundColor: []
   }]
 };
 
@@ -26,14 +15,44 @@ export default class Donut extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      goals: [],
       data: null
     };
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState({ data: data });
-    }, 500);
+    const user = JSON.parse(localStorage.getItem('user-information'));
+    const userId = parseInt(user.userId);
+    fetch(`/api/goals/${userId}`, {
+      method: 'GET'
+    })
+      .then(res => res.json())
+      .then(data => {
+        const arr = [...this.state.goals];
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i]);
+          datachart.labels.push(data[i].goalName);
+          datachart.datasets[0].data.push(data[i].goalCount);
+          const x = Random();
+          datachart.datasets[0].backgroundColor.push(x);
+          const y = Random();
+          datachart.datasets[0].hoverBackgroundColor.push(y);
+
+        }
+        this.setState({
+          goals: arr,
+          data: datachart
+        });
+      });
+
+  }
+
+  componentWillUnmount() {
+    datachart.labels = [];
+    datachart.datasets[0].data = [];
+    datachart.datasets[0].backgroundColor = [];
+    datachart.datasets[0].hoverBackgroundColor = [];
+
   }
 
   render() {
