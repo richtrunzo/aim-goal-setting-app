@@ -34,7 +34,16 @@ export default class Notes extends React.Component {
       goals: this.state.goals,
       addModal: true,
       viewModal: false,
-      goalId: event.target.id,
+      goalId: event.target.id
+    });
+  }
+
+  viewModalOn() {
+    this.setState({
+      goals: this.state.goals,
+      addModal: false,
+      viewModal: true,
+      goalId: event.target.id
     });
   }
 
@@ -54,8 +63,8 @@ export default class Notes extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange" onClick={this.addModalOn}>Add Notes</button>
-              <button id={value.goalId} type="button" className="btn btn-primary btn-sm red" onClick={}>View Notes</button>
+              <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange">Add Notes</button>
+              <button id={value.goalId} type="button" className="btn btn-primary btn-sm green">View Notes</button>
             </div>
           </div>;
         })
@@ -67,11 +76,11 @@ export default class Notes extends React.Component {
 
   addModalRender() {
     return <>
-      <div className="mode"></div>
-      <div>
-        <div className="d-flex justify-content-between flex-wrap">
-          {this.state.goals.map((value, index) => {
-            return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
+          <div className="mode"></div>
+          <div>
+            <div className="d-flex justify-content-between flex-wrap">
+              {this.state.goals.map((value, index) => {
+                return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
               <div className="mx-auto circle white border border-dark border-3">
                 <i className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
               </div>
@@ -81,28 +90,22 @@ export default class Notes extends React.Component {
                 <button type="button" className="btn btn-primary btn-sm red">View Notes</button>
               </div>
             </div>;
-          })
+              })
           }
         </div>
       </div>
       <div className="filter">
-        <div>
-          <div className="input-group input-group-lg mt-3">
-            <span className="input-group-text text orange white-text" id="inputGroup-sizing-md">Edit Goal</span>
-            <input type="text" className="form-control white" aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-lg" onChange={this.nameChange} />
-          </div>
-        </div>
-        <h1 className="text orange-text mx-auto ms-3">Pick an Image</h1>
 
-        </div>
         <div className="d-grid gap-2 col-6 mx-auto">
           <button className="btn btn-primary orange mt-5" type="button" onClick={this.editGoals}><a href="#home">Save</a></button>
         </div>
       </div>
     </>;
+
   }
 
   render() {
+    return this.goalsRender();
+  }
 
 }
