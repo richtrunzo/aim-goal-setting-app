@@ -113,10 +113,14 @@ a {
  }
 
  .green {
-   background-color: chartreuse;
+   background-color: #228B22
  }
 
  .textarea {
    width: 80%;
    height: 300px;
+ }
+
+ .note {
+   width: 90%;
  }

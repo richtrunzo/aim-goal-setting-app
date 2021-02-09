@@ -128,7 +128,7 @@ export default class Notes extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange" onClick={this.addModalOn}>Add Notes</button>
+              <button id={value.goalId} type="button" className="btn btn-primary btn-sm orange" onClick={this.addModalOn}>Add Notes</button>
               <button id={value.goalId} type="button" className="btn btn-primary btn-sm green" onClick={this.viewModalOn}>View Notes</button>
             </div>
           </div>;
@@ -151,8 +151,8 @@ export default class Notes extends React.Component {
               </div>
               <p className="text-center text-two">{value.goalName}</p>
               <div className="d-flex justify-content-around">
-                <button type="button" className=" px-3 btn btn-primary btn-sm orange">Add Notes</button>
-                <button type="button" className="btn btn-primary btn-sm red">View Notes</button>
+                <button type="button" className="btn btn-primary btn-sm orange">Add Notes</button>
+                <button type="button" className="btn btn-primary btn-sm green">View Notes</button>
               </div>
             </div>;
               })
@@ -187,8 +187,8 @@ export default class Notes extends React.Component {
               </div>
               <p className="text-center text-two">{value.goalName}</p>
               <div className="d-flex justify-content-around">
-                <button type="button" className=" px-3 btn btn-primary btn-sm orange">Add Notes</button>
-                <button type="button" className="btn btn-primary btn-sm red">View Notes</button>
+                <button type="button" className="btn btn-primary btn-sm orange">Add Notes</button>
+                <button type="button" className="btn btn-primary btn-sm green">View Notes</button>
               </div>
             </div>;
           })
@@ -202,8 +202,8 @@ export default class Notes extends React.Component {
         <div>
           {this.state.notes.map((value, index) => {
             if (parseInt(this.state.goalId) === value.goalId) {
-              return <div key={value.noteId}>
-                        <p className="text-center text-three orange-text">{value.note}</p>
+              return <div key={value.noteId} className="d-flex justify-content-center">
+                        <p className="text-center text-three orange border border-dark note">{value.note}</p>
                      </div>;
             }
           })}
