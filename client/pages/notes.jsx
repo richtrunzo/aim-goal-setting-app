@@ -7,10 +7,14 @@ export default class Notes extends React.Component {
       goals: [],
       addModal: false,
       viewModal: false,
-      goalId: null
+      goalId: null,
+      note: null
     };
     this.noGoalsRender = this.noGoalsRender.bind(this);
     this.addModalOn = this.addModalOn.bind(this);
+    this.viewModalOn = this.viewModalOn.bind(this);
+    this.noteHandler = this.noteHandler.bind(this);
+    this.addNote = this.addNote.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +42,31 @@ export default class Notes extends React.Component {
     });
   }
 
+  noteHandler() {
+    this.setState({
+      goals: this.state.goals,
+      addModal: this.state.addModal,
+      viewModal: this.state.viewModal,
+      goalId: event.target.id,
+      note: event.target.value
+    });
+  }
+
+  addNote() {
+    const note = {
+      goalId: this.state.goalId,
+      note: this.state.note
+    };
+    fetch('api/notes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(note)
+    })
+      .then(res => res.json());
+  }
+
   viewModalOn() {
     this.setState({
       goals: this.state.goals,
@@ -63,7 +92,7 @@ export default class Notes extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange">Add Notes</button>
+              <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange" onClick={this.addModalOn}>Add Notes</button>
               <button id={value.goalId} type="button" className="btn btn-primary btn-sm green">View Notes</button>
             </div>
           </div>;
@@ -95,9 +124,14 @@ export default class Notes extends React.Component {
         </div>
       </div>
       <div className="filter">
-
+        <div className="d-flex justify-content-center">
+          <h1 className="mt-3 text orange-text">Add a Note</h1>
+        </div>
+        <div className="d-flex justify-content-center">
+          <textarea className="mt-3 textarea" onChange={this.noteHandler}></textarea>
+        </div>
         <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary orange mt-5" type="button" onClick={this.editGoals}><a href="#home">Save</a></button>
+          <button className="btn btn-primary orange mt-5" type="button" onClick={this.addNote}><a href="#home">Save</a></button>
         </div>
       </div>
     </>;
@@ -105,7 +139,10 @@ export default class Notes extends React.Component {
   }
 
   render() {
-    return this.goalsRender();
+    if (this.state.addModal === true && this.state.viewModal === false) {
+      return this.addModalRender();
+    } else {
+      return this.goalsRender();
+    }
   }
-
 }
