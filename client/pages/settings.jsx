@@ -8,6 +8,9 @@ export default function Settings(props) {
            <div className="d-grid gap-2 mt-5">
               <button className="btn btn-primary settings-btn orange mt-5 mb-5 mx-auto text-two" type="button"><a href="#edit">Edit Goals</a></button>
            </div>
+           <div className="d-grid gap-2 mt-5">
+            <button className="btn btn-primary settings-btn orange mt-5 mb-5 mx-auto text-two" type="button"><a href="#notes">Notes</a></button>
+           </div>
            </>;
 
 }
