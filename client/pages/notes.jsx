@@ -38,7 +38,8 @@ export default class Notes extends React.Component {
       goals: this.state.goals,
       addModal: true,
       viewModal: false,
-      goalId: event.target.id
+      goalId: event.target.id,
+      note: this.state.note
     });
   }
 
@@ -47,7 +48,7 @@ export default class Notes extends React.Component {
       goals: this.state.goals,
       addModal: this.state.addModal,
       viewModal: this.state.viewModal,
-      goalId: event.target.id,
+      goalId: this.state.goalId,
       note: event.target.value
     });
   }
@@ -65,6 +66,14 @@ export default class Notes extends React.Component {
       body: JSON.stringify(note)
     })
       .then(res => res.json());
+
+    this.setState({
+      goals: this.state.goals,
+      addModal: false,
+      viewModal: false,
+      goalId: this.state.goalId,
+      note: this.state.note
+    });
   }
 
   viewModalOn() {
@@ -131,7 +140,7 @@ export default class Notes extends React.Component {
           <textarea className="mt-3 textarea" onChange={this.noteHandler}></textarea>
         </div>
         <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary orange mt-5" type="button" onClick={this.addNote}><a href="#home">Save</a></button>
+          <button className="btn btn-primary orange mt-5" type="button" onClick={this.addNote}><a href="#notes">Save</a></button>
         </div>
       </div>
     </>;
