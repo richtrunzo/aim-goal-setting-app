@@ -5,6 +5,7 @@ export default class Notes extends React.Component {
     super(props);
     this.state = {
       goals: [],
+      notes: [],
       addModal: false,
       viewModal: false,
       goalId: null,
@@ -31,6 +32,18 @@ export default class Notes extends React.Component {
         }
         this.setState({ goals: arr });
       });
+
+    fetch('api/notes', { method: 'GET' })
+      .then(res => res.json())
+      .then(data => {
+        const arr = [...this.state.notes];
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i]);
+        }
+        this.setState({ notes: arr });
+        console.log(this.state.notes);
+      });
+
   }
 
   addModalOn() {
