@@ -5,6 +5,7 @@ export default class Notes extends React.Component {
     super(props);
     this.state = {
       goals: [],
+      notes: [],
       addModal: false,
       viewModal: false,
       goalId: null,
@@ -15,6 +16,7 @@ export default class Notes extends React.Component {
     this.viewModalOn = this.viewModalOn.bind(this);
     this.noteHandler = this.noteHandler.bind(this);
     this.addNote = this.addNote.bind(this);
+    this.viewModalOff = this.viewModalOff.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +33,18 @@ export default class Notes extends React.Component {
         }
         this.setState({ goals: arr });
       });
+
+    fetch('api/notes', { method: 'GET' })
+      .then(res => res.json())
+      .then(data => {
+        const arr = [...this.state.notes];
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i]);
+        }
+        this.setState({ notes: arr });
+        console.log(this.state.notes);
+      });
+
   }
 
   addModalOn() {
@@ -79,9 +93,22 @@ export default class Notes extends React.Component {
   viewModalOn() {
     this.setState({
       goals: this.state.goals,
+      notes: this.state.notes,
       addModal: false,
       viewModal: true,
-      goalId: event.target.id
+      goalId: event.target.id,
+      note: this.state.note
+    });
+  }
+
+  viewModalOff() {
+    this.setState({
+      goals: this.state.goals,
+      notes: this.state.notes,
+      addModal: false,
+      viewModal: false,
+      goalId: event.target.id,
+      note: this.state.note
     });
   }
 
@@ -101,8 +128,8 @@ export default class Notes extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange" onClick={this.addModalOn}>Add Notes</button>
-              <button id={value.goalId} type="button" className="btn btn-primary btn-sm green">View Notes</button>
+              <button id={value.goalId} type="button" className="btn btn-primary btn-sm orange" onClick={this.addModalOn}>Add Notes</button>
+              <button id={value.goalId} type="button" className="btn btn-primary btn-sm green" onClick={this.viewModalOn}>View Notes</button>
             </div>
           </div>;
         })
@@ -124,8 +151,8 @@ export default class Notes extends React.Component {
               </div>
               <p className="text-center text-two">{value.goalName}</p>
               <div className="d-flex justify-content-around">
-                <button type="button" className=" px-3 btn btn-primary btn-sm orange">Add Notes</button>
-                <button type="button" className="btn btn-primary btn-sm red">View Notes</button>
+                <button type="button" className="btn btn-primary btn-sm orange">Add Notes</button>
+                <button type="button" className="btn btn-primary btn-sm green">View Notes</button>
               </div>
             </div>;
               })
@@ -147,11 +174,56 @@ export default class Notes extends React.Component {
 
   }
 
+  viewNotesRender() {
+    console.log(this.state);
+    return <>
+      <div className="mode"></div>
+      <div>
+        <div className="d-flex justify-content-between flex-wrap">
+          {this.state.goals.map((value, index) => {
+            return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
+              <div className="mx-auto circle white border border-dark border-3">
+                <i className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
+              </div>
+              <p className="text-center text-two">{value.goalName}</p>
+              <div className="d-flex justify-content-around">
+                <button type="button" className="btn btn-primary btn-sm orange">Add Notes</button>
+                <button type="button" className="btn btn-primary btn-sm green">View Notes</button>
+              </div>
+            </div>;
+          })
+          }
+        </div>
+      </div>
+      <div className="filter">
+        <div className="d-flex justify-content-center">
+          <h1 className="mt-3 text orange-text">Notes</h1>
+        </div>
+        <div>
+          {this.state.notes.map((value, index) => {
+            if (parseInt(this.state.goalId) === value.goalId) {
+              return <div key={value.noteId} className="d-flex justify-content-center">
+                        <p className="text-center text-three orange border border-dark note">{value.note}</p>
+                     </div>;
+            }
+          })}
+        </div>
+        <div className="d-grid gap-2 col-6 mx-auto">
+          <button className="btn btn-primary orange mt-5" type="button"><a href="#notes" onClick={this.viewModalOff}>Go Back</a></button>
+        </div>
+      </div>
+    </>;
+
+  }
+
   render() {
     if (this.state.addModal === true && this.state.viewModal === false) {
       return this.addModalRender();
+    } else if (this.state.addModal === false && this.state.viewModal === true) {
+      return this.viewNotesRender();
     } else {
       return this.goalsRender();
     }
+
   }
 }

@@ -31,7 +31,7 @@
 }
 
 .white {
-  background-color: #f5f5dc;
+  background-color: #f2f3f4;
 
 }
 
@@ -45,6 +45,11 @@
 
 .orange-text {
   color: #F2A359
+}
+
+.white-text {
+  color: #f2f3f4;
+
 }
 
 .hover:hover {
@@ -113,10 +118,18 @@ a {
  }
 
  .green {
-   background-color: chartreuse;
+   background-color: #228B22
+ }
+
+ .green-circle {
+  background-image: radial-gradient( circle farthest-corner at 5.6% 54.5%,  rgb(104, 142, 155) 0%, rgba(159,188,198,1) 83.6% );
  }
 
  .textarea {
    width: 80%;
    height: 300px;
+ }
+
+ .note {
+   width: 90%;
  }

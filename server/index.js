@@ -213,6 +213,23 @@ app.post('/api/notes', (req, res) => {
     });
 });
 
+app.get('/api/notes', (req, res) => {
+  const sql = `
+  select *
+  from "dailynotes"`;
+  db.query(sql)
+    .then(result => {
+      const goal = [...result.rows];
+      res.status(201).json(goal);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
