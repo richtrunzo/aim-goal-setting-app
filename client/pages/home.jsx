@@ -7,7 +7,7 @@ export default class Home extends React.Component {
     this.state = {
       goals: [],
       completed: [],
-      active: []
+      active: null
     };
     this.noGoalsRender = this.noGoalsRender.bind(this);
     this.goalsRender = this.goalsRender.bind(this);
@@ -17,6 +17,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
+    // WIll NEED CHANGED WHEN AUTH IS IMPLEMENTED
     const user = JSON.parse(localStorage.getItem('user-information'));
     const userId = parseInt(user.userId);
     fetch(`/api/goals/${userId}`, {
@@ -57,6 +58,7 @@ export default class Home extends React.Component {
 
     const combinedState = [...this.state.goals];
     const completedState = [...this.state.completed];
+    console.log(combinedState);
 
     combinedState.map((value, index) => {
       completedState.map((newvalue, newindex) => {
@@ -100,7 +102,7 @@ export default class Home extends React.Component {
           body: JSON.stringify(goalObj)
         })
           .then(res => res.json())
-          .then(data => console.log(data));
+          .then(data => console.log('Made it here'));
 
         const counter = value.goalCount + 1;
         const count = {
@@ -120,12 +122,49 @@ export default class Home extends React.Component {
   }
 
   toggleClass() {
-    this.setState({ active: event.target.id });
+    this.setState({
+      goals: [],
+      completed: [],
+      active: event.target.id
+    });
+
+    // WIll NEED CHANGED WHEN AUTH IS IMPLEMENTED
+    const user = JSON.parse(localStorage.getItem('user-information'));
+    const userId = parseInt(user.userId);
+    fetch(`/api/goals/${userId}`, {
+      method: 'GET'
+    })
+      .then(res => res.json())
+      .then(data => {
+        const arr = [...this.state.goals];
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i]);
+        }
+        this.setState({ goals: arr });
+      });
+
+    fetch('/api/getTimes', { method: 'GET' })
+      .then(res => res.json())
+      .then(data => {
+        const arr = [...this.state.completed];
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i]);
+        }
+        for (let i = 0; i < arr.length; i++) {
+          if (Today(arr[i].timeCompleted) > 0) {
+            arr[i].timeCompleted = true;
+          } else if (Today(arr[i].timeComepleted) < 0) {
+            arr[i].timeCompleted = false;
+          }
+        }
+        this.setState({ completed: arr });
+      });
   }
 
   onClick() {
     this.completeGoal();
     this.toggleClass();
+    console.log(this.state);
 
   }
 
@@ -154,6 +193,7 @@ export default class Home extends React.Component {
     });
 
     console.log(this.state);
+    console.log(combinedState);
 
     return (
       <div>
