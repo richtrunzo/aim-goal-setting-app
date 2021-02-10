@@ -33,9 +33,9 @@ export default class Track extends React.Component {
   renderCharts() {
     return <React.Fragment>
           <div className="d-flex justify-content-around mt-5">
-            <button id="bar" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Bar Chart</button>
-            <button id="polar" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Polar Graph</button>
-            <button id="doghnut" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Doughnut</button>
+            <button id="bar" className="btn dblue text-two col" type="button" onClick={this.onClick}><i id="bar" className="icon-one white-text fas fa-chart-bar" onClick={this.onClick}></i></button>
+            <button id="polar" className="btn dblue text-two col" type="button" onClick={this.onClick}><i id="polar" className="icon-one white-text fas fa-sun" onClick={this.onClick}></i></button>
+        <button id="doghnut" className="btn dblue text-two col" type="button" onClick={this.onClick}><i id="doghnut" className="icon-one white-text fas fa-chart-pie" onClick={this.onClick}></i></button>
           </div>
           <Allgoals />
           <div>
@@ -48,9 +48,9 @@ export default class Track extends React.Component {
     if (this.state.current === null) {
       return <React.Fragment>
               <div className="d-flex justify-content-around mt-5">
-                <button id="bar" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Bar Chart</button>
-                <button id="polar" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Polar Graph</button>
-                <button id="doghnut" className="btn btn-primary orange text-two col" type="button" onClick={this.onClick}>Doghnut</button>
+                <button id="bar" className="btn dblue text-two col" type="button" onClick={this.onClick}><i className="icon-one white-text fas fa-chart-bar" id="bar" onClick={this.onClick}></i></button>
+                <button id="polar" className="btn dblue text-two col" type="button" onClick={this.onClick}><i className="icon-one white-text fas fa-sun" id="polar" onClick={this.onClick}></i></button>
+                <button id="doghnut" className="btn dblue text-two col" type="button" onClick={this.onClick}><i className="icon-one white-text fas fa-chart-pie" id="doghnut" onClick={this.onClick}></i></button>
               </div>
               <Allgoals />
             </React.Fragment>;

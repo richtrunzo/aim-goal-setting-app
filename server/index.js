@@ -107,26 +107,38 @@ app.delete('/api/delete/:goalId', (req, res) => {
   const params = [goalId];
   db.query(sql, params)
     .then(() => {
-      const newsql = `
-      delete from "dailygoals"
-      where "goalId" = $1
-      `;
-      const newparams = [goalId];
-      db.query(newsql, newparams)
-        .then(res.status(201))
+      const notessql = `
+        delete from "dailynotes"
+        where "goalId" = $1`;
+      const notesparams = [goalId];
+      db.query(notessql, notesparams)
+        .then(() => {
+          const newsql = `
+            delete from "dailygoals"
+            where "goalId" = $1`;
+          const newparams = [goalId];
+          db.query(newsql, newparams)
+            .then(res.status(201))
+            .catch(err => {
+              console.error(err);
+              res.status(500).json({
+                error: 'an unexpected error occurred'
+              });
+            })
+            .catch(err => {
+              console.error(err);
+              res.status(500).json({
+                error: 'an unexpected error occurred'
+              });
+            });
+        }
+        )
         .catch(err => {
           console.error(err);
           res.status(500).json({
             error: 'an unexpected error occurred'
           });
         });
-    }
-    )
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'an unexpected error occurred'
-      });
     });
 });
 

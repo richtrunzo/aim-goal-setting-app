@@ -92,14 +92,15 @@ export default class Home extends React.Component {
           .then(res => res.json());
 
       } else if (parseInt(goalId) === value.goalId && value.goalCount === 0) {
-        fetch('/api/completedTime/', {
+        fetch('/api/completedTime', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(goalObj)
         })
-          .then(res => res.json());
+          .then(res => res.json())
+          .then(data => console.log(data));
 
         const counter = value.goalCount + 1;
         const count = {
@@ -152,6 +153,8 @@ export default class Home extends React.Component {
       });
     });
 
+    console.log(this.state);
+
     return (
       <div>
         <div className="d-flex justify-content-between flex-wrap">
@@ -165,7 +168,7 @@ export default class Home extends React.Component {
               </div>);
             } else if (value.timeCompleted === false || value.timeCompleted === undefined) {
               return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
-                <div id={value.goalId} className="mx-auto circle white border border-dark border-1" onClick={this.onClick}>
+                <div id={value.goalId} className="mx-auto circle white border border-dark border-1">
                   <i id={value.goalId} name="icon" completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`} onClick={this.onClick}></i>
                       </div>
                       <p className="text-center text-two">{value.goalName}</p>

@@ -43,6 +43,42 @@
   background-color: #ba434b;
 }
 
+.black {
+  background-color: #0B0c10;
+}
+
+.dgrey {
+  background-color:  #474b4f;
+}
+
+.lgrey {
+  background-color: #C5C6C7;
+}
+
+.lblue {
+  background-color: #86c232;
+}
+
+.dblue {
+  background-color: #61892f;
+}
+
+.dgrey-text {
+  color: #474b4f;
+}
+
+.lgrey-text {
+  color: #C5C6C7;
+}
+
+.lblue-text {
+  color: #86c232;
+}
+
+.dblue-text {
+  color: #61892f;
+}
+
 .orange-text {
   color: #F2A359
 }
@@ -54,6 +90,9 @@
 
 .hover:hover {
   color: #F2A359
+}
+.icon-head {
+  font-size: 40px;
 }
 
 .icon-one {

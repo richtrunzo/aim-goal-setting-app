@@ -6,7 +6,7 @@ const datachart = {
   labels: [],
   datasets: [
     {
-      label: 'My Goals',
+      label: 'My Goals Tracker',
       backgroundColor: [],
       borderColor: [],
       borderWidth: 1,
