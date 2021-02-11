@@ -25,6 +25,7 @@ export default class Home extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         const arr = [...this.state.goals];
         for (let i = 0; i < data.length; i++) {
           arr.push(data[i]);
@@ -35,46 +36,29 @@ export default class Home extends React.Component {
     fetch('/api/getTimes', { method: 'GET' })
       .then(res => res.json())
       .then(data => {
-        // const arr = [...this.state.completed];
-        // for (let i = 0; i < data.length; i++) {
-        //   arr.push(data[i]);
-        // }
-        // for (let i = 0; i < arr.length; i++) {
-        //   if (Today(arr[i].timeCompleted) > 0) {
-        //     arr[i].timeCompleted = true;
-        //   } else if (Today(arr[i].timeCompleted) < 0) {
-        //     arr[i].timeCompleted = false;
-        //   }
-        // }
+        console.log(data);
         this.setState({ completed: data });
+        console.log(this.state);
       });
   }
 
   completeGoal() {
     const goalId = event.target.id;
-    let goalCount = null;
-
     const goalObj = {
       goalId: event.target.id,
-      goalCount: goalCount + 1
+      goalCount: null
     };
+    console.log(goalObj);
 
-    const combinedState = [...this.state.goals];
-    const completedState = [...this.state.completed];
-
-    combinedState.map((value, index) => {
-      completedState.map((newvalue, newindex) => {
-        if (value.goalId === newvalue.goalId) {
-          combinedState[index].timeCompleted = completedState[newindex].timeCompleted;
-        }
-      });
-    });
-
-    combinedState.map((value, index) => {
+    this.state.goals.map((value, index) => {
       if (parseInt(goalId) === value.goalId) {
-        goalCount = value.goalCount;
+        console.log(value);
+        console.log(value.goalCount);
+        goalObj.goalCount = value.goalCount + 1;
       }
     });
+
+    console.log(goalObj);
 
     fetch('api/updategoal', {
       method: 'PATCH',
@@ -111,18 +95,6 @@ export default class Home extends React.Component {
     fetch('/api/getTimes', { method: 'GET' })
       .then(res => res.json())
       .then(data => {
-        // const arr = [...this.state.completed];
-        // for (let i = 0; i < data.length; i++) {
-        //   arr.push(data[i]);
-        // }
-
-        // for (let i = 0; i < arr.length; i++) {
-        //   if (Today(arr[i].timeCompleted) > 0) {
-        //     arr[i].timeCompleted = true;
-        //   } else if (Today(arr[i].timeCompleted) < 0) {
-        //     arr[i].timeCompleted = false;
-        //   }
-        // }
         this.setState({ completed: data });
       });
   }
