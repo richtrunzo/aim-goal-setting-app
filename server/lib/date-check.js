@@ -1,5 +1,5 @@
 
-export default function Today(inputDate) {
+function today(inputDate) {
   const today = new Date().getDate();
   const input = new Date(inputDate).getDate();
   if (today === input) {
@@ -8,3 +8,5 @@ export default function Today(inputDate) {
     return -1;
   }
 }
+
+module.exports = today;

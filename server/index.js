@@ -2,6 +2,7 @@ require('dotenv/config');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
+const today = require('./lib/date-check');
 
 const app = express();
 
@@ -64,7 +65,8 @@ app.get('/api/goals/:userId', (req, res) => {
   const sql = `
   select *
   from "dailygoals"
-  where "userId" = $1`;
+  where "userId" = $1
+  order by "goalId"`;
   const params = [userId];
   db.query(sql, params)
     .then(result => {
@@ -142,28 +144,18 @@ app.delete('/api/delete/:goalId', (req, res) => {
     });
 });
 
-app.post('/api/completedTime', (req, res) => {
-  const { goalId } = req.body;
-  const sql = `
-  insert into "completedgoals" ("goalId")
-  values ($1)
-  returning *`;
-  const params = [goalId];
-  db.query(sql, params)
-    .then(res.status(201))
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'an unexpected error occurred'
-      });
-    });
-});
-
 app.get('/api/getTimes', (req, res) => {
   const sql = 'select * from "completedgoals"';
   db.query(sql)
     .then(result => {
       const times = result.rows;
+      for (let i = 0; i < times.length; i++) {
+        if (today(times[i].timeCompleted) > 0) {
+          times[i].timeCompleted = true;
+        } else if (today(times[i].timeCompleted) < 0) {
+          times[i].timeCompleted = false;
+        }
+      }
       res.status(201).json(times);
     })
     .catch(err => {
@@ -174,32 +166,30 @@ app.get('/api/getTimes', (req, res) => {
     });
 });
 
-app.patch('/api/goalcount', (req, res) => {
-  const { goalId, count } = req.body;
+app.patch('/api/updategoal', (req, res) => {
+  const { goalId, goalCount } = req.body;
   const sql = `
-  update "dailygoals"
-  set "goalCount" = $1
-  where "goalId" = $2`;
-  const params = [count, goalId];
-  db.query(sql, params)
-    .then(res.status(201))
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'an unexpected error occurred'
-      });
-    });
-});
-
-app.patch('/api/updatecompletedTime', (req, res) => {
-  const { goalId } = req.body;
-  const sql = `
-update "completedgoals"
-set "timeCompleted" = now()
-where "goalId" = $1`;
+insert into "completedgoals" ("goalId")
+values ($1)
+on conflict ("goalId")
+do update set "timeCompleted" = now()`;
   const params = [goalId];
   db.query(sql, params)
-    .then(res.status(201))
+    .then(() => {
+      const sql = `
+      update "dailygoals"
+      set "goalCount" = $2
+      where "goalId" = $1`;
+      const params = [goalId, goalCount];
+      db.query(sql, params)
+        .then(res.status(201))
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'an unexpected error occurred'
+          });
+        });
+    })
     .catch(err => {
       console.error(err);
       res.status(500).json({

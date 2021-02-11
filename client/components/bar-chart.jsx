@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import Random from './random-color';
 
 const datachart = {
-  labels: [],
+  labels: ['My Goals:'],
   datasets: [
     {
       label: 'My Goals Tracker',
@@ -12,7 +12,7 @@ const datachart = {
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
-      data: []
+      data: [0]
     }
   ]
 };
@@ -52,8 +52,8 @@ export default class Bargraph extends React.Component {
   }
 
   componentWillUnmount() {
-    datachart.labels = [];
-    datachart.datasets[0].data = [];
+    datachart.labels = ['MyGoals:'];
+    datachart.datasets[0].data = [0];
     datachart.datasets[0].backgroundColor = [];
     datachart.datasets[0].borderColor = [];
   }

@@ -12,7 +12,6 @@ export default class Start extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         const userData = JSON.stringify(data);
         localStorage.setItem('user-information', userData);
       });
