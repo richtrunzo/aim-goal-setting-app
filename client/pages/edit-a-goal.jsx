@@ -111,8 +111,7 @@ export default class Edit extends React.Component {
         },
         body: JSON.stringify(editGoal)
       })
-        .then(res => res.json())
-        .then(data => console.log(data));
+        .then(res => res.json());
     }
   }
 
@@ -206,12 +205,12 @@ export default class Edit extends React.Component {
       <div className="filter">
       <div>
         <div className="input-group input-group-lg mt-3">
-          <span className="input-group-text text dgreen white-text" id="inputGroup-sizing-md">Edit Goal</span>
+          <span className="input-group-text text dgreen white-text" id="inputGroup-sizing-md">Goal Name</span>
           <input type="text" className="form-control white" aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-lg" onChange={this.nameChange} />
         </div>
       </div>
-      <h1 className="text dgreen-text mx-auto ms-3">Pick an Image</h1>
+      <h1 className="text dgreen-text mx-auto ms-3 mt-3">Image:</h1>
       <div>
         <div className="d-flex justify-content-around mt-3">
           <div>

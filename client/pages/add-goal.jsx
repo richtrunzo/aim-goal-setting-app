@@ -61,8 +61,7 @@ export default class Addgoal extends React.Component {
       },
       body: JSON.stringify(newGoal)
     })
-      .then(res => res.json())
-      .then(data => console.log(data));
+      .then(res => res.json());
   }
 
   modalRender() {

@@ -50,7 +50,6 @@ app.post('/api/goals', (req, res) => {
   db.query(sql, params)
     .then(result => {
       const [goal] = result.rows;
-      console.log(goal);
       res.status(201).json(goal);
     })
     .catch(err => {
@@ -182,7 +181,6 @@ do update set "timeCompleted" = now()`;
       set "goalCount" = $2
       where "goalId" = $1`;
       const params = [goalId, goalCount];
-      console.log(params);
       db.query(sql, params)
         .then(res.status(201))
         .catch(err => {

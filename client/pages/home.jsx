@@ -25,7 +25,6 @@ export default class Home extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         const arr = [...this.state.goals];
         for (let i = 0; i < data.length; i++) {
           arr.push(data[i]);
@@ -36,9 +35,7 @@ export default class Home extends React.Component {
     fetch('/api/getTimes', { method: 'GET' })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({ completed: data });
-        console.log(this.state);
       });
   }
 
@@ -48,17 +45,12 @@ export default class Home extends React.Component {
       goalId: event.target.id,
       goalCount: null
     };
-    console.log(goalObj);
 
     this.state.goals.map((value, index) => {
       if (parseInt(goalId) === value.goalId) {
-        console.log(value);
-        console.log(value.goalCount);
         goalObj.goalCount = value.goalCount + 1;
       }
     });
-
-    console.log(goalObj);
 
     fetch('api/updategoal', {
       method: 'PATCH',
