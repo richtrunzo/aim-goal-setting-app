@@ -126,7 +126,7 @@ export default class Edit extends React.Component {
 
   noGoalsRender() {
     return <div className="mt-5">
-            <h3 className="text-center mt-5 text-one">No Goals Saved</h3>
+            <h3 className="text-center mt-5 text-one lgreen-text">No Goals Saved</h3>
           </div>;
   }
 
@@ -135,13 +135,13 @@ export default class Edit extends React.Component {
       <div className="d-flex justify-content-between flex-wrap">
         {this.state.goals.map((value, index) => {
           return <div key={value.goalId} className="mt-5 col-6">
-            <div className="mx-auto circle white border border-dark border-3">
-              <i className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
+            <div className="mx-auto circle dgrey border border-dark border-3">
+              <i className={`icon-one position-relative top-50 start-50 translate-middle lgreen-text ${value.image}`}></i>
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-primary btn-sm orange" onClick={this.editModalOn}>Edit</button>
-              <button id={value.goalId} type="button" className="btn btn-primary btn-sm red" onClick={this.delete}>Delete</button>
+              <button id={value.goalId} type="button" className=" px-3 btn btn-sm lgreen white-text" onClick={this.editModalOn}>Edit</button>
+              <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text" onClick={this.delete}>Delete</button>
             </div>
           </div>;
         })
@@ -158,24 +158,24 @@ export default class Edit extends React.Component {
               <div className="d-flex justify-content-between flex-wrap">
               {this.state.goals.map((value, index) => {
                 return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
-                        <div className="mx-auto circle white border border-dark border-3">
+                        <div className="mx-auto circle dgrey border border-dark border-3">
                           <i className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
                         </div>
                         <p className="text-center text-two">{value.goalName}</p>
                         <div className="d-flex justify-content-around">
-                          <button type="button" className=" px-3 btn btn-primary btn-sm orange">Edit</button>
-                          <button type="button" className="btn btn-primary btn-sm red">Delete</button>
+                          <button type="button" className=" px-3 btn btn-sm lgreen white-text">Edit</button>
+                          <button type="button" className="btn btn-sm dgrey white-text">Delete</button>
                         </div>
                       </div>;
               })
                         }
         <div className="filter">
-           <h1 className="text-two orange-text mt-2 px-5 text-center">Are you sure you want to delete this goal?</h1>
+           <h1 className="text-two dgreen-text mt-2 px-5 text-center">Are you sure you want to delete this goal?</h1>
           <div className="d-grid gap-2 mt-5">
-              <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteOff}>No, go back</button>
+              <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteOff}>No, go back</button>
           </div>
           <div className="d-grid gap-2 mt-5">
-            <button className="btn btn-primary settings-btn orange mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}><a href="#home">Yes, delete</a></button>
+            <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}><a href="#home">Yes, delete</a></button>
           </div>
           </div>
         </div>
@@ -206,12 +206,12 @@ export default class Edit extends React.Component {
       <div className="filter">
       <div>
         <div className="input-group input-group-lg mt-3">
-          <span className="input-group-text text orange white-text" id="inputGroup-sizing-md">Edit Goal</span>
+          <span className="input-group-text text dgreen white-text" id="inputGroup-sizing-md">Edit Goal</span>
           <input type="text" className="form-control white" aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-lg" onChange={this.nameChange} />
         </div>
       </div>
-      <h1 className="text orange-text mx-auto ms-3">Pick an Image</h1>
+      <h1 className="text dgreen-text mx-auto ms-3">Pick an Image</h1>
       <div>
         <div className="d-flex justify-content-around mt-3">
           <div>
@@ -271,7 +271,7 @@ export default class Edit extends React.Component {
         </div>
       </div>
       <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary orange mt-5" type="button" onClick={this.editGoals}><a href="#home">Save</a></button>
+          <button className="btn btn-primary dgreen white-text mt-5" type="button" onClick={this.editGoals}><a href="#home">Save</a></button>
       </div>
     </div>
     </>;

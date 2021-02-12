@@ -109,7 +109,7 @@ export default class Home extends React.Component {
     return <div>
             <div className="d-flex justify-content-between flex-wrap">
               <div className="mt-5 col-6">
-                <div className="mx-auto circle white border border-dark border-1">
+                <div className="mx-auto circle white border border-dark border-1 shadow">
                   <a href="#addgoal"><i className="icon-one position-relative top-50 start-50 translate-middle fas fa-plus"></i></a>
                 </div>
               </div>
@@ -135,22 +135,22 @@ export default class Home extends React.Component {
           {combinedState.map((value, index) => {
             if (parseInt(this.state.active) === value.goalId) {
               return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
-                <div className="mx-auto circle green-circle border border-dark border-1">
-                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
+                <div className="mx-auto circle lgreen border border-dark border-1 shadow-lg animate__animated animate__bounceIn">
+                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle dgrey-text icon-animation ${value.image}`}></i>
                 </div>
                 <p className="text-center text-two">{value.goalName}</p>
               </div>);
             } else if (value.timeCompleted === false || value.timeCompleted === undefined) {
               return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
-                <div id={value.goalId} className="mx-auto circle white border border-dark border-1">
-                  <i id={value.goalId} name="icon" completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`} onClick={this.onClick}></i>
+                <div id={value.goalId} className="mx-auto circle dgrey border border-dark border-1 shadow-lg animate__animated animate__bounceIn">
+                  <i id={value.goalId} name="icon" completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle lgreen-text ${value.image}`} onClick={this.onClick}></i>
                       </div>
                       <p className="text-center text-two">{value.goalName}</p>
                     </div>);
             } else if (value.timeCompleted === true) {
               return (<div id={value.goalId} key={value.goalId} className="mt-5 col-6">
-                <div className="mx-auto circle green-circle border border-dark border-1">
-                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
+                <div className="mx-auto circle lgreen border border-dark border-1 shadow-lg animate__animated animate__bounceIn">
+                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle dgrey-text ${value.image}`}></i>
                 </div>
                 <p className="text-center text-two">{value.goalName}</p>
               </div>);
@@ -158,8 +158,8 @@ export default class Home extends React.Component {
           })
           }
             <div className="mt-5 col-6">
-              <div className="mx-auto circle white border border-dark border-1">
-                <a href="#addgoal"><i className="icon-one position-relative top-50 start-50 translate-middle fas fa-plus"></i></a>
+              <div className="mx-auto circle dgrey border border-dark border-1 shadow animate__animated animate__bounceIn">
+              <a href="#addgoal"><i className="icon-one position-relative top-50 start-50 translate-middle lgreen-text fas fa-plus"></i></a>
               </div>
             </div>
       </div>

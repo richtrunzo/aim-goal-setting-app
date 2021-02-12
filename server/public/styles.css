@@ -1,3 +1,13 @@
+
+.threed {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.shadowtwo {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 .text {
   color: #fafafa;
   font-size: 50px;
@@ -55,11 +65,11 @@
   background-color: #C5C6C7;
 }
 
-.lblue {
+.lgreen {
   background-color: #86c232;
 }
 
-.dblue {
+.dgreen {
   background-color: #61892f;
 }
 
@@ -71,11 +81,11 @@
   color: #C5C6C7;
 }
 
-.lblue-text {
+.lgreen-text {
   color: #86c232;
 }
 
-.dblue-text {
+.dgreen-text {
   color: #61892f;
 }
 
@@ -137,11 +147,13 @@
   height: 80%;
   width: 90%;
   z-index: 9999;
-  background-color: #f5f5dc;
+  background-color: #C5C6C9;
   position: absolute;
   top: 15%;
   left: 5%;
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 }
 .settings-btn {
   height: 100%;
@@ -161,7 +173,7 @@ a {
  }
 
  .green-circle {
-  background-image: radial-gradient( circle farthest-corner at 5.6% 54.5%,  rgb(104, 142, 155) 0%, rgba(159,188,198,1) 83.6% );
+  background-image: radial-gradient( circle farthest-corner at 5.6% 54.5%,   #61892f 0%, #86c232 83.6% );
  }
 
  .textarea {
