@@ -48,8 +48,8 @@
   background-color: #F2A359;
 }
 
-.red {
-  background-color: #ba434b;
+.red-text {
+  color: #ba434b;
 }
 
 .black {
@@ -154,6 +154,19 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 }
+
+.errorfilter {
+  height: 60%;
+  width: 90%;
+  z-index: 9999;
+  background-color: #C5C6C9;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 .settings-btn {
   height: 100%;
   width: 90%

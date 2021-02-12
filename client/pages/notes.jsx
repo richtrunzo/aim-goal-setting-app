@@ -9,7 +9,8 @@ export default class Notes extends React.Component {
       addModal: false,
       viewModal: false,
       goalId: null,
-      note: null
+      note: null,
+      errormodal: false
     };
     this.noGoalsRender = this.noGoalsRender.bind(this);
     this.addModalOn = this.addModalOn.bind(this);
@@ -53,7 +54,8 @@ export default class Notes extends React.Component {
       addModal: true,
       viewModal: false,
       goalId: event.target.id,
-      note: this.state.note
+      note: this.state.note,
+      errormodal: false
     });
   }
 
@@ -64,42 +66,55 @@ export default class Notes extends React.Component {
       addModal: this.state.addModal,
       viewModal: this.state.viewModal,
       goalId: this.state.goalId,
-      note: event.target.value
+      note: event.target.value,
+      errormodal: this.state.errormodal
     });
   }
 
   addNote() {
-    const note = {
-      goalId: this.state.goalId,
-      note: this.state.note
-    };
-    fetch('api/notes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(note)
-    })
-      .then(res => res.json());
-
-    this.setState({
-      goals: this.state.goals,
-      notes: [],
-      addModal: false,
-      viewModal: false,
-      goalId: this.state.goalId,
-      note: this.state.note
-    });
-
-    fetch('api/notes', { method: 'GET' })
-      .then(res => res.json())
-      .then(data => {
-        const arr = [...this.state.notes];
-        for (let i = 0; i < data.length; i++) {
-          arr.push(data[i]);
-        }
-        this.setState({ notes: arr });
+    if (this.state.note === null) {
+      this.setState({
+        goals: this.state.goals,
+        notes: this.state.notes,
+        addModal: false,
+        viewModal: false,
+        goalId: this.state.goalId,
+        note: null,
+        errormodal: true
       });
+    } else {
+      const note = {
+        goalId: this.state.goalId,
+        note: this.state.note
+      };
+      fetch('api/notes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(note)
+      })
+        .then(res => res.json());
+
+      this.setState({
+        goals: this.state.goals,
+        notes: [],
+        addModal: false,
+        viewModal: false,
+        goalId: this.state.goalId,
+        note: this.state.note
+      });
+
+      fetch('api/notes', { method: 'GET' })
+        .then(res => res.json())
+        .then(data => {
+          const arr = [...this.state.notes];
+          for (let i = 0; i < data.length; i++) {
+            arr.push(data[i]);
+          }
+          this.setState({ notes: arr });
+        });
+    }
   }
 
   viewModalOn() {
@@ -109,7 +124,8 @@ export default class Notes extends React.Component {
       addModal: false,
       viewModal: true,
       goalId: event.target.id,
-      note: this.state.note
+      note: this.state.note,
+      errormodal: false
     });
   }
 
@@ -120,7 +136,8 @@ export default class Notes extends React.Component {
       addModal: false,
       viewModal: false,
       goalId: event.target.id,
-      note: this.state.note
+      note: this.state.note,
+      errormodal: false
     });
   }
 
@@ -227,14 +244,47 @@ export default class Notes extends React.Component {
 
   }
 
+  errorRender() {
+    return <>
+      <div className="mode"></div>
+      <div>
+        <div className="d-flex justify-content-between flex-wrap">
+          {this.state.goals.map((value, index) => {
+            return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
+              <div className="mx-auto circle dgrey border border-dark border-3">
+                <i className={`icon-one position-relative top-50 start-50 translate-middle ${value.image}`}></i>
+              </div>
+              <p className="text-center text-two">{value.goalName}</p>
+              <div className="d-flex justify-content-around">
+                <button type="button" className="btn btn-sm lgreen white-text">Add Notes</button>
+                <button type="button" className="btn btn-sm dgrey white-text">View Notes</button>
+              </div>
+            </div>;
+          })
+          }
+        </div>
+      </div>
+      <div className="errorfilter">
+        <div className="d-flex justify-content-center">
+          <h1 className="mt-3 text-center text-two red-text">Note field must be complete</h1>
+        </div>
+        <div className="d-grid gap-2 col-6 mx-auto">
+          <button className="btn lgreen white-text mt-5" type="button"><a href="#notes" onClick={this.viewModalOff}>Try Again</a></button>
+        </div>
+      </div>
+    </>;
+
+  }
+
   render() {
-    if (this.state.addModal === true && this.state.viewModal === false) {
+    if (this.state.addModal === true && this.state.viewModal === false && this.state.errormodal === false) {
       return this.addModalRender();
-    } else if (this.state.addModal === false && this.state.viewModal === true) {
+    } else if (this.state.addModal === false && this.state.viewModal === true && this.state.errormodal === false) {
       return this.viewNotesRender();
+    } else if (this.state.addModal === false && this.state.viewModal === false && this.state.errormodal === true) {
+      return this.errorRender();
     } else {
       return this.goalsRender();
     }
-
   }
 }
