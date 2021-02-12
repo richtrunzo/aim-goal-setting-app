@@ -2,7 +2,6 @@ require('dotenv/config');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
-const today = require('./lib/date-check');
 
 const app = express();
 
@@ -71,7 +70,25 @@ app.get('/api/goals/:userId', (req, res) => {
   db.query(sql, params)
     .then(result => {
       const goal = [...result.rows];
-      res.status(201).json(goal);
+      const sql = 'select * from "completedgoals"';
+      db.query(sql)
+        .then(result => {
+          const times = result.rows;
+          goal.map((value, index) => {
+            times.map((newvalue, newindex) => {
+              if (value.goalId === newvalue.goalId) {
+                goal[index].timeCompleted = times[newindex].timeCompleted;
+              }
+            });
+          });
+          res.status(201).json(goal);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'an unexpected error occurred'
+          });
+        });
     })
     .catch(err => {
       console.error(err);
@@ -141,28 +158,6 @@ app.delete('/api/delete/:goalId', (req, res) => {
             error: 'an unexpected error occurred'
           });
         });
-    });
-});
-
-app.get('/api/getTimes', (req, res) => {
-  const sql = 'select * from "completedgoals"';
-  db.query(sql)
-    .then(result => {
-      const times = result.rows;
-      for (let i = 0; i < times.length; i++) {
-        if (today(times[i].timeCompleted) > 0) {
-          times[i].timeCompleted = true;
-        } else if (today(times[i].timeCompleted) < 0) {
-          times[i].timeCompleted = false;
-        }
-      }
-      res.status(201).json(times);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'an unexpected error occurred'
-      });
     });
 });
 

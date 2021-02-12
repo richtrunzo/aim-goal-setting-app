@@ -49,6 +49,7 @@ export default class Notes extends React.Component {
   addModalOn() {
     this.setState({
       goals: this.state.goals,
+      notes: this.state.notes,
       addModal: true,
       viewModal: false,
       goalId: event.target.id,
@@ -59,6 +60,7 @@ export default class Notes extends React.Component {
   noteHandler() {
     this.setState({
       goals: this.state.goals,
+      notes: this.state.notes,
       addModal: this.state.addModal,
       viewModal: this.state.viewModal,
       goalId: this.state.goalId,
@@ -82,6 +84,7 @@ export default class Notes extends React.Component {
 
     this.setState({
       goals: this.state.goals,
+      notes: [],
       addModal: false,
       viewModal: false,
       goalId: this.state.goalId,
