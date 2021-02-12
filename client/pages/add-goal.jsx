@@ -70,18 +70,18 @@ export default class Addgoal extends React.Component {
       <div className="mode"></div>
           <div>
             <div className="input-group input-group-lg mt-5">
-              <span className="input-group-text orange" id="inputGroup-sizing-md">Name Your Goal</span>
+              <span className="input-group-text dgreen white-text" id="inputGroup-sizing-md">Name Your Goal</span>
               <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary orange mt-5" type="button">Pick an Image</button>
+              <button className="btn btn-primary lgreen-text mt-5" type="button">Pick an Image</button>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary orange mt-5" type="button">Save</button>
+              <button className="btn dgreen white-text mt-5" type="button">Save</button>
             </div>
           </div>
           <div className="filter">
-            <h1 className="text orange-text mx-auto ms-3">Pick an Image</h1>
+            <h1 className="text lgreen-text mx-auto ms-3">Pick an Image</h1>
             <div>
               <div className="d-flex justify-content-around mt-5">
                 <div>
@@ -141,7 +141,7 @@ export default class Addgoal extends React.Component {
               </div>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOff}>Save</button>
+              <button className="btn dgreen white-text mt-5" type="button" onClick={this.modalOff}>Save</button>
             </div>
           </div>
         </>;
@@ -152,30 +152,30 @@ export default class Addgoal extends React.Component {
     if (this.state.image !== null) {
       return <div>
               <div className="input-group input-group-lg mt-5">
-                <span className="input-group-text orange" id="inputGroup-sizing-md">Name Your Goal</span>
-          <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange} />
+                <span className="input-group-text dgreen white-text" id="inputGroup-sizing-md">Name Your Goal</span>
+          <input type="text" className="form-control white-text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange} />
               </div>
               <div className="d-grid gap-2 col-6 mx-auto">
-                <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
+                <button className="btn dgreen white-text mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
               </div>
               <div className="col-6 mx-auto text-center mt-5">
                 <i className={this.state.image}></i>
               </div>
               <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary orange mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
+          <button className="btn dgreen white-text mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
               </div>
             </div>;
     } else {
       return <div>
             <div className="input-group input-group-lg mt-5">
-              <span className="input-group-text orange" id="inputGroup-sizing-md">Name Your Goal</span>
-          <input type="text" className="form-control white" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange}/>
+              <span className="input-group-text dgreen white-text" id="inputGroup-sizing-md">Name Your Goal</span>
+          <input type="text" className="form-control white-text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange}/>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary orange mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
+              <button className="btn dgreen white-text mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary orange mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
+          <button className="btn dgreen white-text mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
             </div>
           </div>;
     }

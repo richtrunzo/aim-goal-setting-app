@@ -1,7 +1,6 @@
 
-.threed {
-    perspective: 1000px;
-    transform-style: preserve-3d;
+.radius {
+  border-radius: 5%;
 }
 
 .shadowtwo {
@@ -144,7 +143,7 @@
 }
 
 .filter {
-  height: 80%;
+  height: 82%;
   width: 90%;
   z-index: 9999;
   background-color: #C5C6C9;
