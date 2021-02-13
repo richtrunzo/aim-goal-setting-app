@@ -29,7 +29,7 @@ app.post('/api/newuser', (req, res) => {
   values ($1, $2)`;
   const params = [username, password];
   db.query(sql, params)
-    .then(res.status(201).json())
+    .then(result => res.status(201).json(result))
     .catch(err => {
       console.error(err);
       res.status(500).json({
@@ -199,7 +199,7 @@ do update set "timeCompleted" = now()`;
       where "goalId" = $1`;
       const params = [goalId, goalCount];
       db.query(sql, params)
-        .then(res.status(201))
+        .then(result => res.status(201).json(result))
         .catch(err => {
           console.error(err);
           res.status(500).json({
@@ -223,7 +223,7 @@ app.post('/api/notes', (req, res) => {
   returning *`;
   const params = [goalId, note];
   db.query(sql, params)
-    .then(res.status(201))
+    .then(result => res.status(201).json(result))
     .catch(err => {
       console.error(err);
       res.status(500).json({
