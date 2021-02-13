@@ -9,6 +9,10 @@ const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL
 });
 
+db.on('error', (err, client) => {
+  console.error('Unexpected error on idle client', err);
+});
+
 app.use(staticMiddleware);
 
 const jsonMiddleWare = express.json();
