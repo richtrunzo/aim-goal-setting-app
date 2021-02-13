@@ -132,7 +132,7 @@ app.patch('/api/goals/:goalId', (req, res) => {
   returning *`;
   const params = [goalName, goalImage, goalId];
   db.query(sql, params)
-    .then(res.status(201))
+    .then(result => res.status(201).json(result))
     .catch(err => {
       console.error(err);
       res.status(500).json({
@@ -160,7 +160,7 @@ app.delete('/api/delete/:goalId', (req, res) => {
             where "goalId" = $1`;
           const newparams = [goalId];
           db.query(newsql, newparams)
-            .then(res.status(201))
+            .then(result => res.status(201).json(result))
             .catch(err => {
               console.error(err);
               res.status(500).json({
@@ -173,8 +173,7 @@ app.delete('/api/delete/:goalId', (req, res) => {
                 error: 'an unexpected error occurred'
               });
             });
-        }
-        )
+        })
         .catch(err => {
           console.error(err);
           res.status(500).json({
