@@ -15,6 +15,22 @@ const jsonMiddleWare = express.json();
 
 app.use(jsonMiddleWare);
 
+app.post('/api/newuser', (req, res) => {
+  const { username, password } = req.body;
+  const sql = `
+  insert into "users" ("userName", "password")
+  values ($1, $2)`;
+  const params = [username, password];
+  db.query(sql, params)
+    .then(res.status(201).json())
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occured'
+      });
+    });
+});
+
 app.get('/api/users', (req, res) => {
   const sql = `
   select "userName", "password", "userId"

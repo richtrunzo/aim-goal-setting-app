@@ -6,6 +6,22 @@ export default class Start extends React.Component {
     this.getUser = this.getUser.bind(this);
   }
 
+  componentDidMount() {
+    const user = {
+      username: 'username',
+      password: 'password'
+    };
+
+    fetch('/api/newuser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json());
+  }
+
   getUser() {
     fetch('/api/users', {
       method: 'GET'
