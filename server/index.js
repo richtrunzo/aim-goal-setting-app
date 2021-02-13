@@ -6,11 +6,14 @@ const pg = require('pg');
 const app = express();
 
 const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 db.on('error', (err, client) => {
-  console.error('Unexpected error on idle client', err);
+  console.error('Unexpected error', err);
 });
 
 app.use(staticMiddleware);
