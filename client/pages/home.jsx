@@ -20,6 +20,7 @@ export default class Home extends React.Component {
     // WIll NEED CHANGED WHEN AUTH IS IMPLEMENTED
     const user = JSON.parse(localStorage.getItem('user-information'));
     const userId = parseInt(user.userId);
+    console.log(userId);
     fetch(`/api/goals/${userId}`, {
       method: 'GET'
     })
@@ -111,7 +112,8 @@ export default class Home extends React.Component {
   }
 
   goalsRender() {
-    return <div className="d-flex justify-content-between flex-wrap">
+    return (<div>
+    <div className="d-flex justify-content-between flex-wrap">
           {this.state.goals.map((value, index) => {
             if (parseInt(this.state.active) === value.goalId) {
               return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
@@ -141,7 +143,9 @@ export default class Home extends React.Component {
               <a href="#addgoal"><i className="icon-one position-relative top-50 start-50 translate-middle lgreen-text fas fa-plus"></i></a>
               </div>
             </div>
-      </div>;
+        </div>
+      </div>
+    );
   }
 
   render() {

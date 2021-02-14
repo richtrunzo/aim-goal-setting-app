@@ -31,7 +31,7 @@ export default class App extends React.Component {
     } else if (this.state.route.path === 'home') {
       return <>
               <Header />
-              <Home />;
+              <Home />
             </>;
     } else if (this.state.route.path === 'addgoal') {
       return <>
