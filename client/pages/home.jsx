@@ -20,7 +20,6 @@ export default class Home extends React.Component {
     // WIll NEED CHANGED WHEN AUTH IS IMPLEMENTED
     const user = JSON.parse(localStorage.getItem('user-information'));
     const userId = parseInt(user.userId);
-    console.log(userId);
     fetch(`/api/goals/${userId}`, {
       method: 'GET'
     })
@@ -118,7 +117,7 @@ export default class Home extends React.Component {
             if (parseInt(this.state.active) === value.goalId) {
               return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
                 <div className="mx-auto circle lgreen border border-dark border-1 shadow-lg animate__animated animate__bounceIn">
-                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle dgrey-text icon-animation ${value.image}`}></i>
+                  <i id={value.goalId} completed={value.goalCount} className="icon-one position-relative top-50 start-50 translate-middle dgrey-text icon-animation fas fa-check"></i>
                 </div>
                 <p className="text-center text-two">{value.goalName}</p>
               </div>;
@@ -132,7 +131,7 @@ export default class Home extends React.Component {
             } else if (value.timeCompleted === true) {
               return <div id={value.goalId} key={value.goalId} className="mt-5 col-6">
                 <div className="mx-auto circle lgreen border border-dark border-1 shadow-lg animate__animated animate__bounceIn">
-                  <i id={value.goalId} completed={value.goalCount} className={`icon-one position-relative top-50 start-50 translate-middle dgrey-text ${value.image}`}></i>
+                  <i id={value.goalId} completed={value.goalCount} className="icon-one position-relative top-50 start-50 translate-middle dgrey-text fas fa-check"></i>
                 </div>
                 <p className="text-center text-two">{value.goalName}</p>
               </div>;
