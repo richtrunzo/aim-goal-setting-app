@@ -142,7 +142,7 @@ export default class Home extends React.Component {
             }
           })}
             <div className="mt-5 d-height col-6">
-              <div className="mx-auto padding-top circle circle-size dgrey border border-dark border-1 shadow animate__animated animate__bounceIn">
+              <div className="mx-auto circle circle-size dgrey border border-dark border-1 shadow animate__animated animate__bounceIn">
               <a href="#addgoal"><i className="icon-one position-relative top-50 start-50 translate-middle big-icon lgreen-text fas fa-plus"></i></a>
               </div>
             </div>

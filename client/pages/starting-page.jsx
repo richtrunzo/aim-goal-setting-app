@@ -24,19 +24,20 @@ export default class Start extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(fetch('/api/users', {
+        method: 'GET'
+      })
+        .then(res => res.json())
+        .then(data => {
+          const userData = JSON.stringify(data);
+          localStorage.setItem('user-information', userData);
+        })
+      );
   }
 
   getUser() {
-    fetch('/api/users', {
-      method: 'GET'
-    })
-      .then(res => res.json())
-      .then(data => {
-        const userData = JSON.stringify(data);
-        localStorage.setItem('user-information', userData);
-        location.hash = '#home';
-      });
+    location.hash = '#home';
   }
 
   modalOn() {
