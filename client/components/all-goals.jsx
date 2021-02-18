@@ -27,8 +27,8 @@ export default class Allgoals extends React.Component {
   }
 
   render() {
-    return <div>
-              <p className="text-two text-center mt-5 dgreen white-text">Total goals completed: {this.state.goalcount}</p>
+    return <div className="d-flex justify-content-center">
+              <p className="text-two text-center mt-5 dgreen-text width">Total goals completed: {this.state.goalcount}</p>
           </div>;
   }
 }

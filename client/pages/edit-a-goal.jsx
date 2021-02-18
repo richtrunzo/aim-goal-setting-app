@@ -111,7 +111,8 @@ export default class Edit extends React.Component {
         },
         body: JSON.stringify(editGoal)
       })
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(location.hash = '#home');
     }
   }
 
@@ -120,12 +121,13 @@ export default class Edit extends React.Component {
     fetch(`/api/delete/${goalId}`, {
       method: 'DELETE'
     })
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(location.hash = '#home');
   }
 
   noGoalsRender() {
     return <div className="mt-5">
-            <h3 className="text-center mt-5 text-one lgreen-text">No Goals Saved</h3>
+            <h3 className="text-center mt-5 text-one">No Goals Saved</h3>
           </div>;
   }
 
@@ -139,8 +141,8 @@ export default class Edit extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-sm lgreen white-text" onClick={this.editModalOn}>Edit</button>
-              <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text" onClick={this.delete}>Delete</button>
+              <button id={value.goalId} type="button" className=" px-3 btn btn-sm lgreen white-text center-margin-left" onClick={this.editModalOn}>Edit</button>
+              <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text center-margin-right" onClick={this.delete}>Delete</button>
             </div>
           </div>;
         })
@@ -174,7 +176,7 @@ export default class Edit extends React.Component {
               <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteOff}>No, go back</button>
           </div>
           <div className="d-grid gap-2 mt-5">
-            <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}><a href="#home">Yes, delete</a></button>
+              <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}>Yes, delete</button>
           </div>
           </div>
         </div>
@@ -194,8 +196,8 @@ export default class Edit extends React.Component {
                         </div>
                         <p className="text-center text-two">{value.goalName}</p>
                         <div className="d-flex justify-content-around">
-                          <button type="button" className=" px-3 btn btn-primary btn-sm orange">Edit</button>
-                          <button type="button" className="btn btn-primary btn-sm red">Delete</button>
+                          <button type="button" className=" px-3 btn btn-sm orange">Edit</button>
+                          <button type="button" className="btn btn-sm red">Delete</button>
                         </div>
                       </div>;
               })
@@ -270,7 +272,7 @@ export default class Edit extends React.Component {
         </div>
       </div>
       <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary dgreen white-text mt-5" type="button" onClick={this.editGoals}><a href="#home">Save</a></button>
+          <button className="btn dgreen white-text mt-5" type="button" onClick={this.editGoals}>Save</button>
       </div>
     </div>
     </>;

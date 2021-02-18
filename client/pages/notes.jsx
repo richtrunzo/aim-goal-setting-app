@@ -157,8 +157,8 @@ export default class Notes extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className="btn btn-sm lgreen white-text" onClick={this.addModalOn}>Add Notes</button>
-              <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text" onClick={this.viewModalOn}>View Notes</button>
+              <button id={value.goalId} type="button" className="btn btn-sm lgreen white-text center-margin-left" onClick={this.addModalOn}>Add Notes</button>
+              <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text center-margin-right" onClick={this.viewModalOn}>View Notes</button>
             </div>
           </div>;
         })
@@ -215,8 +215,8 @@ export default class Notes extends React.Component {
               </div>
               <p className="text-center text-two">{value.goalName}</p>
               <div className="d-flex justify-content-around">
-                <button type="button" className="btn btn-sm lgreen white-text">Add Notes</button>
-                <button type="button" className="btn btn-sm dgrey white-text">View Notes</button>
+                <button type="button" className="btn btn-sm lgreen white-text center-margin-left">Add Notes</button>
+                <button type="button" className="btn btn-sm dgrey white-text center-margin-right">View Notes</button>
               </div>
             </div>;
           })
@@ -283,8 +283,10 @@ export default class Notes extends React.Component {
       return this.viewNotesRender();
     } else if (this.state.addModal === false && this.state.viewModal === false && this.state.errormodal === true) {
       return this.errorRender();
-    } else {
+    } else if (this.state.addModal === false && this.state.viewModal === false && this.state.errormodal === false && this.state.goals.length > 0) {
       return this.goalsRender();
+    } else {
+      return this.noGoalsRender();
     }
   }
 }
