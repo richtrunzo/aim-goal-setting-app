@@ -35,6 +35,7 @@ export default class Start extends React.Component {
       .then(data => {
         const userData = JSON.stringify(data);
         localStorage.setItem('user-information', userData);
+        location.hash = '#home';
       });
   }
 
@@ -74,7 +75,7 @@ export default class Start extends React.Component {
         <p className="text-two text-center">Welcome to AIM<br></br>the app that tracks your goals</p>
       </div>
       <div>
-        <a href="#home"><button className="btn-lg position-absolute top-50 start-50 translate-middle lgreen text" onClick={this.getUser}>Try it out!</button></a>
+       <button className="btn-lg position-absolute top-50 start-50 translate-middle lgreen text" onClick={this.getUser}>Try it out!</button>
       </div>
       <div>
         <button className="btn-lg position-absolute top-50 start-50 translate-middle lgreen text" onClick={this.modalOn}>About AIM</button>
