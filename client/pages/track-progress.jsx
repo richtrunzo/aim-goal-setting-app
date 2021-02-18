@@ -33,7 +33,7 @@ export default class Track extends React.Component {
   renderCharts() {
     if (this.state.current === 'bar') {
       return <React.Fragment>
-        <div className="d-flex justify-content-around mt-5">
+        <div className="d-flex justify-content-center mt-5 width mx-auto">
           <button id="bar" className="btn border border-dark border-1 lgreen text-two col radius" type="button" onClick={this.onClick}><i id="bar" className="icon-one white-text fas fa-chart-bar" onClick={this.onClick}></i></button>
           <button id="polar" className="btn border border-dark border-1 dgreen col text-two radius" type="button" onClick={this.onClick}><i id="polar" className="icon-one white-text fas fa-sun" onClick={this.onClick}></i></button>
           <button id="doghnut" className="btn border border-dark border-1 dgreen text-two col radius" type="button" onClick={this.onClick}><i id="doghnut" className="icon-one white-text fas fa-chart-pie" onClick={this.onClick}></i></button>
@@ -46,7 +46,7 @@ export default class Track extends React.Component {
 
     } else if (this.state.current === 'polar') {
       return <React.Fragment>
-          <div className="d-flex justify-content-around mt-5">
+        <div className="d-flex justify-content-center mt-5 width mx-auto">
             <button id="bar" className="btn dgreen border border-dark border-1 text-two col radius" type="button" onClick={this.onClick}><i id="bar" className="icon-one white-text fas fa-chart-bar" onClick={this.onClick}></i></button>
             <button id="polar" className="btn lgreen border border-dark border-1 col text-two radius" type="button" onClick={this.onClick}><i id="polar" className="icon-one white-text fas fa-sun" onClick={this.onClick}></i></button>
             <button id="doghnut" className="btn dgreen border border-dark border-1 text-two col radius" type="button" onClick={this.onClick}><i id="doghnut" className="icon-one white-text fas fa-chart-pie" onClick={this.onClick}></i></button>
@@ -58,7 +58,7 @@ export default class Track extends React.Component {
         </React.Fragment>;
     } else {
       return <React.Fragment>
-        <div className="d-flex justify-content-around mt-5">
+        <div className="d-flex justify-content-center mt-5 width mx-auto">
           <button id="bar" className="btn dgreen border border-dark border-1 text-two col radius" type="button" onClick={this.onClick}><i id="bar" className="icon-one white-text fas fa-chart-bar" onClick={this.onClick}></i></button>
           <button id="polar" className="btn dgreen border border-dark border-1 col text-two radius" type="button" onClick={this.onClick}><i id="polar" className="icon-one white-text fas fa-sun" onClick={this.onClick}></i></button>
           <button id="doghnut" className="btn lgreen border border-dark border-1 text-two col radius" type="button" onClick={this.onClick}><i id="doghnut" className="icon-one white-text fas fa-chart-pie" onClick={this.onClick}></i></button>
@@ -75,7 +75,7 @@ export default class Track extends React.Component {
   render() {
     if (this.state.current === null) {
       return <React.Fragment>
-              <div className="d-flex justify-content-around mt-5">
+              <div className="d-flex justify-content-center mt-5 width mx-auto">
                 <button id="bar" className="btn dgreen border border-dark border-1 text-two col radius" type="button" onClick={this.onClick}><i className="icon-one white-text fas fa-chart-bar" id="bar" onClick={this.onClick}></i></button>
                 <button id="polar" className="btn dgreen border border-dark border-1 text-two col radius" type="button" onClick={this.onClick}><i className="icon-one white-text fas fa-sun" id="polar" onClick={this.onClick}></i></button>
                 <button id="doghnut" className="btn dgreen border border-dark border-1 text-two col radius" type="button" onClick={this.onClick}><i className="icon-one white-text fas fa-chart-pie" id="doghnut" onClick={this.onClick}></i></button>

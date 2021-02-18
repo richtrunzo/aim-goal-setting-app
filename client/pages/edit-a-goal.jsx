@@ -141,8 +141,8 @@ export default class Edit extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-sm lgreen white-text" onClick={this.editModalOn}>Edit</button>
-              <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text" onClick={this.delete}>Delete</button>
+              <button id={value.goalId} type="button" className=" px-3 btn btn-sm lgreen white-text center-margin-left" onClick={this.editModalOn}>Edit</button>
+              <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text center-margin-right" onClick={this.delete}>Delete</button>
             </div>
           </div>;
         })
@@ -196,8 +196,8 @@ export default class Edit extends React.Component {
                         </div>
                         <p className="text-center text-two">{value.goalName}</p>
                         <div className="d-flex justify-content-around">
-                          <button type="button" className=" px-3 btn btn-primary btn-sm orange">Edit</button>
-                          <button type="button" className="btn btn-primary btn-sm red">Delete</button>
+                          <button type="button" className=" px-3 btn btn-sm orange">Edit</button>
+                          <button type="button" className="btn btn-sm red">Delete</button>
                         </div>
                       </div>;
               })
@@ -272,7 +272,7 @@ export default class Edit extends React.Component {
         </div>
       </div>
       <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary dgreen white-text mt-5" type="button" onClick={this.editGoals}>Save</button>
+          <button className="btn dgreen white-text mt-5" type="button" onClick={this.editGoals}>Save</button>
       </div>
     </div>
     </>;

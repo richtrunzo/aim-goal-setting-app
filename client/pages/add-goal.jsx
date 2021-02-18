@@ -175,9 +175,9 @@ export default class Addgoal extends React.Component {
   page() {
     if (this.state.image !== null && this.state.name !== null) {
       return <div>
-              <div className="input-group input-group-lg mt-5">
-                <span className="input-group-text dgreen white-text" id="inputGroup-sizing-md">Name Your Goal</span>
-          <input type="text" className="form-control white-text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange} />
+        <div className="input-group input-group-lg mt-5 width mx-auto">
+                <span className="input-group-text dgreen white-text width" id="inputGroup-sizing-md">Name Your Goal</span>
+                  <input type="text" className="form-control white-text width" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange} />
               </div>
               <div className="col-6 mx-auto text-center mt-5">
                 <p className="text-center lgreen-text text">{this.state.name}</p>
@@ -194,9 +194,9 @@ export default class Addgoal extends React.Component {
             </div>;
     } else if (this.state.image !== null && this.state.name === null) {
       return <div>
-        <div className="input-group input-group-lg mt-5">
-          <span className="input-group-text dgreen white-text" id="inputGroup-sizing-md">Name Your Goal</span>
-          <input type="text" className="form-control white-text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange} />
+        <div className="input-group input-group-lg mt-5 width mx-auto">
+          <span className="input-group-text dgreen white-text width" id="inputGroup-sizing-md">Name Your Goal</span>
+          <input type="text" className="form-control white-text width" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange} />
         </div>
         <div className="d-grid gap-2 col-6 mx-auto">
           <button className="btn dgreen white-text mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
@@ -210,9 +210,9 @@ export default class Addgoal extends React.Component {
       </div>;
     } else {
       return <div>
-            <div className="input-group input-group-lg mt-5">
-              <span className="input-group-text dgreen white-text" id="inputGroup-sizing-md">Name Your Goal</span>
-          <input type="text" className="form-control white-text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange}/>
+        <div className="input-group input-group-lg mt-5 width mx-auto">
+              <span className="input-group-text dgreen white-text width" id="inputGroup-sizing-md">Name Your Goal</span>
+          <input type="text" className="form-control white-text width" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.onHandleChange}/>
             </div>
             <div className="col-6 mx-auto text-center mt-5">
               <p className="text-center lgreen-text text">{this.state.name}</p>
@@ -221,7 +221,7 @@ export default class Addgoal extends React.Component {
               <button className="btn dgreen white-text mt-5" type="button" onClick={this.modalOn}>Pick an Image</button>
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn dgreen white-text mt-5" type="button" onClick={this.postGoal}>Save</button>
+              <button className="btn dgreen white-text mt-5 " type="button" onClick={this.postGoal}>Save</button>
             </div>
           </div>;
     }

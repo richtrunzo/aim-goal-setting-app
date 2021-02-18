@@ -82,45 +82,6 @@ app.post('/api/goals', (req, res) => {
     });
 });
 
-// app.get('/api/goals/:userId', (req, res) => {
-//   const userId = req.params.userId;
-//   const sql = `
-//   select *
-//   from "dailygoals"
-//   where "userId" = $1
-//   order by "goalId"`;
-//   const params = [userId];
-//   db.query(sql, params)
-//     .then(result => {
-//       const goal = [...result.rows];
-//       const sql = 'select * from "completedgoals"';
-//       db.query(sql)
-//         .then(result => {
-//           const times = result.rows;
-//           goal.map((value, index) => {
-//             times.map((newvalue, newindex) => {
-//               if (value.goalId === newvalue.goalId) {
-//                 goal[index].timeCompleted = times[newindex].timeCompleted;
-//               }
-//             });
-//           });
-//           res.status(201).json(goal);
-//         })
-//         .catch(err => {
-//           console.error(err);
-//           res.status(500).json({
-//             error: 'an unexpected error occurred'
-//           });
-//         });
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.status(500).json({
-//         error: 'an unexpected error occurred'
-//       });
-//     });
-// });
-
 app.patch('/api/goals/:goalId', (req, res) => {
   const goalId = req.params.goalId;
   const { goalName, goalImage } = req.body;
