@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Header(props) {
   return (
-      <div className="container header black">
+      <div className="header black">
         <div className="d-flex justify-content-around">
              <div className="text-center">
               <a href="#home"><i className="fas fa-home dgreen-text icon-head pt-2"></i></a>

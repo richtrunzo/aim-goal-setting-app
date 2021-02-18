@@ -41,6 +41,7 @@ export default class Polarchart extends React.Component {
           data: datachart
         });
       });
+
   }
 
   componentWillUnmount() {
@@ -51,6 +52,7 @@ export default class Polarchart extends React.Component {
   }
 
   render() {
+
     return (
       <div className="mt-5">
         <Polar data={this.state.data} />

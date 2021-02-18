@@ -111,7 +111,8 @@ export default class Edit extends React.Component {
         },
         body: JSON.stringify(editGoal)
       })
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(location.hash = '#home');
     }
   }
 
@@ -120,7 +121,8 @@ export default class Edit extends React.Component {
     fetch(`/api/delete/${goalId}`, {
       method: 'DELETE'
     })
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(location.hash = '#home');
   }
 
   noGoalsRender() {
@@ -174,7 +176,7 @@ export default class Edit extends React.Component {
               <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteOff}>No, go back</button>
           </div>
           <div className="d-grid gap-2 mt-5">
-            <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}><a href="#home">Yes, delete</a></button>
+              <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteGoals}>Yes, delete</button>
           </div>
           </div>
         </div>
@@ -270,7 +272,7 @@ export default class Edit extends React.Component {
         </div>
       </div>
       <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn btn-primary dgreen white-text mt-5" type="button" onClick={this.editGoals}><a href="#home">Save</a></button>
+          <button className="btn btn-primary dgreen white-text mt-5" type="button" onClick={this.editGoals}>Save</button>
       </div>
     </div>
     </>;

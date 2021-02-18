@@ -84,7 +84,8 @@ export default class Addgoal extends React.Component {
         },
         body: JSON.stringify(newGoal)
       })
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(location.hash = '#home');
     }
   }
 
@@ -188,7 +189,7 @@ export default class Addgoal extends React.Component {
                 <i className={this.state.image}></i>
               </div>
               <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn dgreen white-text mt-5" type="button" onClick={this.postGoal}><a href="#home">Save</a></button>
+          <button className="btn dgreen white-text mt-5" type="button" onClick={this.postGoal}>Save</button>
               </div>
             </div>;
     } else if (this.state.image !== null && this.state.name === null) {
