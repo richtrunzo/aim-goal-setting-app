@@ -73,7 +73,6 @@ app.post('/api/goals', (req, res) => {
     .then(result => {
       const [goal] = result.rows;
       res.status(201).json(goal);
-      console.log('goal posted');
     })
     .catch(err => {
       console.error(err);
@@ -163,7 +162,6 @@ app.delete('/api/delete/:goalId', (req, res) => {
           db.query(newsql, newparams)
             .then(result => {
               res.status(201).json(result);
-              console.log('delete finished');
             })
             .catch(err => {
               console.error(err);
@@ -276,7 +274,6 @@ app.get('/api/goals/:userId', (req, res) => {
             });
           });
           res.status(201).json(goal);
-          console.log('got goals');
         })
         .catch(err => {
           console.error(err);

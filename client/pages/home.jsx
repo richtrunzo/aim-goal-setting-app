@@ -37,8 +37,6 @@ export default class Home extends React.Component {
           }
         }
         this.setState({ goals: arr });
-        console.log(this.state);
-        console.log('got goals');
       });
   }
 
@@ -101,7 +99,6 @@ export default class Home extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('home unmount');
     this.setState({ goals: [] });
   }
 
@@ -118,7 +115,6 @@ export default class Home extends React.Component {
   }
 
   goalsRender() {
-    console.log(this.state);
     return (<div>
     <div className="d-flex justify-content-between flex-wrap">
           {this.state.goals.map((value, index) => {
@@ -156,7 +152,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     if (this.state.goals.length > 0) {
       return this.goalsRender();
     } else {

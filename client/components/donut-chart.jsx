@@ -23,7 +23,6 @@ export default class Donut extends React.Component {
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user-information'));
     const userId = parseInt(user.userId);
-    console.log('thisRuns');
     fetch(`/api/goals/${userId}`, {
       method: 'GET'
     })
