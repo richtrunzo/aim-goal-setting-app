@@ -56,10 +56,16 @@ export default class Donut extends React.Component {
   }
 
   render() {
-    return (
+    if (this.state.goals.length > 0) {
+      return (
       <div className="mt-5">
         <Doughnut data={this.state.data} />
       </div>
-    );
+      );
+    } else {
+      return <div className="mt-5 d-flex justify-content-center">
+        <h1>No Goals Saved</h1>
+      </div>;
+    }
   }
 }

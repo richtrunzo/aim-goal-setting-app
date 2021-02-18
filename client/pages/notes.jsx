@@ -283,8 +283,10 @@ export default class Notes extends React.Component {
       return this.viewNotesRender();
     } else if (this.state.addModal === false && this.state.viewModal === false && this.state.errormodal === true) {
       return this.errorRender();
-    } else {
+    } else if (this.state.addModal === false && this.state.viewModal === false && this.state.errormodal === false && this.state.goals.length > 0) {
       return this.goalsRender();
+    } else {
+      return this.noGoalsRender();
     }
   }
 }

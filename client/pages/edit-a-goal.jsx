@@ -127,7 +127,7 @@ export default class Edit extends React.Component {
 
   noGoalsRender() {
     return <div className="mt-5">
-            <h3 className="text-center mt-5 text-one lgreen-text">No Goals Saved</h3>
+            <h3 className="text-center mt-5 text-one">No Goals Saved</h3>
           </div>;
   }
 
