@@ -94,7 +94,17 @@ export default class Notes extends React.Component {
         },
         body: JSON.stringify(note)
       })
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(fetch('api/notes', { method: 'GET' })
+          .then(res => res.json())
+          .then(data => {
+            const arr = [...this.state.notes];
+            for (let i = 0; i < data.length; i++) {
+              arr.push(data[i]);
+            }
+            this.setState({ notes: arr });
+          })
+        );
 
       this.setState({
         goals: this.state.goals,
@@ -105,15 +115,6 @@ export default class Notes extends React.Component {
         note: this.state.note
       });
 
-      fetch('api/notes', { method: 'GET' })
-        .then(res => res.json())
-        .then(data => {
-          const arr = [...this.state.notes];
-          for (let i = 0; i < data.length; i++) {
-            arr.push(data[i]);
-          }
-          this.setState({ notes: arr });
-        });
     }
   }
 
@@ -237,7 +238,7 @@ export default class Notes extends React.Component {
           })}
         </div>
         <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn lgreen white-text mt-5" type="button"><a href="#notes" onClick={this.viewModalOff}>Go Back</a></button>
+          <button className="btn lgreen white-text mt-5" type="button" onClick={this.viewModalOff}>Go Back</button>
         </div>
       </div>
     </>;
@@ -269,7 +270,7 @@ export default class Notes extends React.Component {
           <h1 className="mt-3 text-center text-two red-text">Note field must be complete</h1>
         </div>
         <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn lgreen white-text mt-5" type="button"><a href="#notes" onClick={this.viewModalOff}>Try Again</a></button>
+          <button className="btn lgreen white-text mt-5" type="button" onClick={this.viewModalOff}>Try Again</button>
         </div>
       </div>
     </>;

@@ -35,6 +35,13 @@
    font-size: 14px;
 }
 
+.text-five {
+   color: #fafafa;
+   font-size: small;
+   font-family: 'Fira Sans', sans-serif;
+   font-size: 14px;
+}
+
 
 .white {
   background-color: #f2f3f4;
@@ -180,4 +187,8 @@ a {
 
  .note {
    width: 90%;
+ }
+
+ .hover:focus {
+  color: white;
  }

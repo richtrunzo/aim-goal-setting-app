@@ -1,5 +1,12 @@
 import React from 'react';
 
+const classNamesOne = [
+  'fas fa-dumbbell icon-one hover',
+  'fas fa-graduation-cap icon-one hover',
+  'fas fa-book icon-one hover',
+  'fas fa-smoking-ban icon-one hover'
+];
+
 export default class Addgoal extends React.Component {
   constructor(props) {
     super(props);
@@ -22,18 +29,14 @@ export default class Addgoal extends React.Component {
   modalOn() {
     this.setState({
       modal: true,
-      errormodal: false,
-      image: this.state.image,
-      name: this.state.name
+      errormodal: false
     });
   }
 
   modalOff() {
     this.setState({
       modal: false,
-      errormodal: false,
-      image: this.state.image,
-      name: this.state.name
+      errormodal: false
     });
   }
 
@@ -53,6 +56,7 @@ export default class Addgoal extends React.Component {
         image: event.target.className
       });
     }
+    this.modalOff();
   }
 
   onHandleChange() {
@@ -109,7 +113,7 @@ export default class Addgoal extends React.Component {
             <div>
               <div className="d-flex justify-content-around mt-5">
                 <div>
-                  <i className="fas fa-dumbbell icon-one hover" onClick={this.imageRender}></i>
+                  <i id="target" className="fas fa-dumbbell icon-one hover" onClick={this.imageRender}></i>
                 </div>
                 <div>
                   <i className="fas fa-graduation-cap icon-one hover" onClick={this.imageRender}></i>
@@ -163,9 +167,6 @@ export default class Addgoal extends React.Component {
                       <i className="fas fa-guitar icon-one hover" onClick={this.imageRender}></i>
                     </div>
               </div>
-            </div>
-            <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn dgreen white-text mt-5" type="button" onClick={this.modalOff}>Save</button>
             </div>
           </div>
         </>;

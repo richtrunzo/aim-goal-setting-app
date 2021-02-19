@@ -86,7 +86,7 @@ export default class Edit extends React.Component {
   }
 
   imageChange() {
-    if (this.state.editModal === true) {
+    if (this.state.editModal === true && this.state.image === null) {
       this.setState({
         goals: this.state.goals,
         editModal: this.state.editModal,
@@ -94,6 +94,7 @@ export default class Edit extends React.Component {
         image: event.target.className,
         goalName: this.state.goalName
       });
+      event.target.className = event.target.className + ' white-text';
     }
   }
 
@@ -206,13 +207,13 @@ export default class Edit extends React.Component {
           </div>
       <div className="filter">
       <div>
+        <h1 className="text-two dgreen-text mx-auto ms-3 mt-3">Enter a goal name, then choose your image</h1>
         <div className="input-group input-group-lg mt-3">
           <span className="input-group-text text dgreen white-text" id="inputGroup-sizing-md">Goal Name</span>
           <input type="text" className="form-control white" aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-lg" onChange={this.nameChange} />
         </div>
       </div>
-      <h1 className="text dgreen-text mx-auto ms-3 mt-3">Image:</h1>
       <div>
         <div className="d-flex justify-content-around mt-3">
           <div>
