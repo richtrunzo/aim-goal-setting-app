@@ -23,4 +23,4 @@ A full-stack, mobile-first application built with React, Node.js, and CSS where 
 
 #### Demo:
 
-![alt text](https://i.imgur.com/yeuE2RB.png "Full functionality of the app")
+![alt text](https://imgur.com/a/mdet6wJ "Full functionality of the app")
