@@ -89,7 +89,7 @@ export default class Addgoal extends React.Component {
         body: JSON.stringify(newGoal)
       })
         .then(res => res.json())
-        .then(location.hash = '#home');
+        .then(() => { location.hash = '#home'; });
     }
   }
 

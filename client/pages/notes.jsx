@@ -98,11 +98,7 @@ export default class Notes extends React.Component {
         .then(fetch('api/notes', { method: 'GET' })
           .then(res => res.json())
           .then(data => {
-            const arr = [...this.state.notes];
-            for (let i = 0; i < data.length; i++) {
-              arr.push(data[i]);
-            }
-            this.setState({ notes: arr });
+            this.setState({ notes: data });
           })
         );
 
@@ -197,7 +193,7 @@ export default class Notes extends React.Component {
           <textarea className="mt-3 textarea" onChange={this.noteHandler}></textarea>
         </div>
         <div className="d-grid gap-2 col-6 mx-auto">
-          <button className="btn lgreen white-text mt-5" type="button" onClick={this.addNote}><a href="#notes">Save</a></button>
+          <button className="btn lgreen white-text mt-5" type="button" onClick={this.addNote}>Save</button>
         </div>
       </div>
     </>;
