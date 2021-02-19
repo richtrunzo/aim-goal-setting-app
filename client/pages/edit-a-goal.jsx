@@ -112,7 +112,7 @@ export default class Edit extends React.Component {
         body: JSON.stringify(editGoal)
       })
         .then(res => res.json())
-        .then(setTimeout(function () { location.hash = '#home'; }, 300));
+        .then(() => { location.hash = '#home'; });
     }
   }
 
@@ -122,7 +122,7 @@ export default class Edit extends React.Component {
       method: 'DELETE'
     })
       .then(res => res.json())
-      .then(setTimeout(function () { location.hash = '#home'; }, 300));
+      .then(() => { location.hash = '#home'; });
   }
 
   noGoalsRender() {
