@@ -140,6 +140,7 @@
   position: absolute;
   top: 15%;
   left: 5%;
+  bottom: 2%;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
@@ -149,10 +150,11 @@
   height: 82%;
   width: 90%;
   z-index: 9999;
-  background-color:  #86c232;
+  background-color: #474b4f;
   position: absolute;
   top: 15%;
   left: 5%;
+  bottom: 2%;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
@@ -166,6 +168,7 @@
   position: absolute;
   top: 15%;
   left: 5%;
+  bottom: 2%;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

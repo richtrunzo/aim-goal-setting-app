@@ -185,7 +185,7 @@ export default class Notes extends React.Component {
           }
         </div>
       </div>
-      <div className="filter">
+      <div className="filter edit-fix">
         <div className="d-flex justify-content-center">
           <h1 className="mt-3 text lgreen-text">Add a Note</h1>
         </div>

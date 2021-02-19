@@ -20,6 +20,7 @@ export default class Edit extends React.Component {
     this.delete = this.delete.bind(this);
     this.deleteGoals = this.deleteGoals.bind(this);
     this.deleteOff = this.deleteOff.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -34,8 +35,21 @@ export default class Edit extends React.Component {
         for (let i = 0; i < data.length; i++) {
           arr.push(data[i]);
         }
+
         this.setState({ goals: arr });
+
       });
+  }
+
+  handleClick(event, image) {
+    this.setState({
+      goals: this.state.goals,
+      editModal: true,
+      deleteModal: false,
+      goalId: event.target.id,
+      image: image,
+      goalName: event.target.name
+    });
   }
 
   editModalOn() {
@@ -44,8 +58,8 @@ export default class Edit extends React.Component {
       editModal: true,
       deleteModal: false,
       goalId: event.target.id,
-      image: this.state.image,
-      goalName: this.state.goalname
+      image: event.target.img_class,
+      goalName: event.target.name
     });
   }
 
@@ -142,7 +156,7 @@ export default class Edit extends React.Component {
             </div>
             <p className="text-center text-two">{value.goalName}</p>
             <div className="d-flex justify-content-around">
-              <button id={value.goalId} type="button" className=" px-3 btn btn-sm lgreen white-text center-margin-left" onClick={this.editModalOn}>Edit</button>
+              <button id={value.goalId} name={value.goalName} type="button" className=" px-3 btn btn-sm lgreen white-text center-margin-left" onClick={e => this.handleClick(e, value.image)}>Edit</button>
               <button id={value.goalId} type="button" className="btn btn-sm dgrey white-text center-margin-right" onClick={this.delete}>Delete</button>
             </div>
           </div>;
@@ -171,7 +185,7 @@ export default class Edit extends React.Component {
                       </div>;
               })
                         }
-        <div className="filter">
+        <div className="filter filter-fix">
            <h1 className="text-two dgreen-text mt-2 px-5 text-center">Are you sure you want to delete this goal?</h1>
           <div className="d-grid gap-2 mt-5">
               <button className="btn settings-btn dgreen white-text mt-4 mb-4 mx-auto text-two" type="button" onClick={this.deleteOff}>No, go back</button>
@@ -186,6 +200,7 @@ export default class Edit extends React.Component {
   }
 
   editModalRender() {
+    console.log(this.state);
     return <>
       <div className="mode"></div>
           <div>
@@ -205,13 +220,14 @@ export default class Edit extends React.Component {
                         }
             </div>
           </div>
-      <div className="filter">
+      <div className="filter edit-fix">
       <div>
-        <h1 className="text-two dgreen-text mx-auto ms-3 mt-3">Enter a goal name, then choose your image</h1>
+        <p className="text-two dgreen-text mt-2 ms-3">Current goal name:   <span className="white-text text-one">{this.state.goalName}</span></p>
+        <p className="text-two dgreen-text mt-2 ms-3">Current image:   <span><i className={`white-text icon-two ${this.state.image}`}></i></span></p>
         <div className="input-group input-group-lg mt-3">
-          <span className="input-group-text text dgreen white-text" id="inputGroup-sizing-md">Goal Name</span>
+          <span className="input-group-text text dgreen white-text" id="inputGroup-sizing-md">New Goal Name</span>
           <input type="text" className="form-control white" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-lg" onChange={this.nameChange} />
+            aria-describedby="inputGroup-sizing-lg" placeholder={this.state.goalName} onChange={this.nameChange} />
         </div>
       </div>
       <div>

@@ -108,7 +108,7 @@ export default class Addgoal extends React.Component {
               <button className="btn dgreen white-text mt-5" type="button">Save</button>
             </div>
           </div>
-          <div className="filter">
+          <div className="filter filter-fix">
             <h1 className="text lgreen-text mx-auto ms-3">Pick an Image</h1>
             <div>
               <div className="d-flex justify-content-around mt-5">
@@ -243,7 +243,7 @@ export default class Addgoal extends React.Component {
               <button className="btn dgreen white-text mt-5" type="button">Save</button>
             </div>
           </div>
-          <div className="errorfilter">
+          <div className="errorfilter filter-fix">
             <div className="d-flex justify-content-center">
               <h1 className="mt-3 text-center text-two red-text px-2">Name field must be complete and an image must be chosen</h1>
             </div>

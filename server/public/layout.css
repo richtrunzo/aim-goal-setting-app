@@ -1,3 +1,33 @@
+
+@media screen and (max-height : 660px) {
+  .filter-fix {
+    height: 110% !important;
+  }
+  .edit-fix {
+    height: 100% !important;
+  }
+}
+
+
+@media screen and (max-height : 500px) {
+  .filter-fix {
+    height: 200% !important;
+  }
+  .edit-fix {
+    height: 150% !important;
+  }
+}
+
+@media screen and (max-height : 280px) {
+  .filter-fix {
+    height: 300% !important;
+  }
+  .edit-fix {
+    height: 200% !important;
+  }
+}
+
+
 @media screen and (min-width: 750px) {
   .d-height {
     height: 120px
