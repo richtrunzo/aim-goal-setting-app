@@ -227,8 +227,9 @@ export default class Notes extends React.Component {
         <div>
           {this.state.notes.map((value, index) => {
             if (parseInt(this.state.goalId) === value.goalId) {
-              return <div key={value.noteId} className="d-flex justify-content-center">
-                        <p className="text-center text-three dgrey white-text border border-dark note">{value.note}</p>
+              return <div key={value.noteId} className="d-flex justify-content-around">
+                <p className="text-center text-three dgrey white-text border border-dark note">{value.note}</p>
+                <i className="fas fa-trash-alt"></i>
                      </div>;
             }
           })}
