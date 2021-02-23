@@ -144,7 +144,21 @@ export default class Notes extends React.Component {
 
     fetch(`/api/deletenote/${noteId}`, { method: 'DELETE' })
       .then(res => res.json())
-      .then(() => { this.viewModalOff(); });
+      .then(() => {
+        fetch('api/notes', { method: 'GET' })
+          .then(res => res.json())
+          .then(data => {
+            this.setState({
+              goals: this.state.goals,
+              notes: data,
+              addModal: false,
+              viewModal: false,
+              goalId: this.state.goalId,
+              note: this.state.note,
+              errormodal: false
+            });
+          });
+      });
   }
 
   noGoalsRender() {
