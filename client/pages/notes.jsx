@@ -224,7 +224,6 @@ export default class Notes extends React.Component {
   }
 
   viewNotesRender() {
-    console.log(this.state);
     return <>
       <div className="mode"></div>
       <div>
