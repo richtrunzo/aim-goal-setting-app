@@ -57,10 +57,16 @@ export default class Start extends React.Component {
         <p className="text-two text-center">Welcome to AIM<br></br>the app that tracks your goals</p>
       </div>
       <div className="d-flex justify-content-center">
-        <a href="#home"><button className="btn-lg lgreen text mt-2" onClick={this.getUser}>Try it out!</button></a>
+        <a href="#home" className="bwidth"><button className="btn-sm lgreen text-two mt-2 width100" onClick={this.getUser}>Try it out!</button></a>
       </div>
       <div className="d-flex justify-content-center">
-        <button className="btn-lg lgreen text mt-5" onClick={this.modalOn}>About Aim</button>
+        <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.modalOn}>About Aim</button>
+      </div>
+      <div className="d-flex justify-content-center">
+        <button className="btn-sm lgreen text-two mt-2 bwidth">Login</button>
+      </div>
+      <div className="d-flex justify-content-center">
+        <button className="btn-sm lgreen text-two mt-2 bwidth">Sign Up</button>
       </div>
    </div>;
   }

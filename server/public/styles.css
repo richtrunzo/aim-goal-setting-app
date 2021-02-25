@@ -195,3 +195,16 @@ a {
  .hover:focus {
   color: white;
  }
+
+ .lpad {
+   padding-left: 2%;
+   padding-right: 2%;
+ }
+
+ .bwidth {
+   width: 45%;
+ }
+
+ .width100 {
+   width: 100%;
+ }
