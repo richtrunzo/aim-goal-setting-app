@@ -18,6 +18,7 @@ export default class Notes extends React.Component {
     this.noteHandler = this.noteHandler.bind(this);
     this.addNote = this.addNote.bind(this);
     this.viewModalOff = this.viewModalOff.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
   }
 
   componentDidMount() {
@@ -138,6 +139,28 @@ export default class Notes extends React.Component {
     });
   }
 
+  deleteNote() {
+    const noteId = event.target.id;
+
+    fetch(`/api/deletenote/${noteId}`, { method: 'DELETE' })
+      .then(res => res.json())
+      .then(() => {
+        fetch('api/notes', { method: 'GET' })
+          .then(res => res.json())
+          .then(data => {
+            this.setState({
+              goals: this.state.goals,
+              notes: data,
+              addModal: false,
+              viewModal: false,
+              goalId: this.state.goalId,
+              note: this.state.note,
+              errormodal: false
+            });
+          });
+      });
+  }
+
   noGoalsRender() {
     return <div className="mt-5">
       <h3 className="text-center mt-5 text-one">No Goals Saved</h3>
@@ -227,8 +250,9 @@ export default class Notes extends React.Component {
         <div>
           {this.state.notes.map((value, index) => {
             if (parseInt(this.state.goalId) === value.goalId) {
-              return <div key={value.noteId} className="d-flex justify-content-center">
-                        <p className="text-center text-three dgrey white-text border border-dark note">{value.note}</p>
+              return <div key={value.noteId} className="d-flex justify-content-around">
+                <p className="text-center text-three dgrey white-text border border-dark note">{value.note}</p>
+                <i id={value.noteId} onClick={this.deleteNote} className="mt-2 dgreen-text fas fa-trash-alt"></i>
                      </div>;
             }
           })}

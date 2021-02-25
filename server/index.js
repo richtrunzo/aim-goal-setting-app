@@ -251,6 +251,22 @@ app.get('/api/goals/:userId', (req, res) => {
     });
 });
 
+app.delete('/api/deletenote/:noteId', (req, res) => {
+  const noteId = req.params.noteId;
+  const sql = `
+  delete from "dailynotes"
+  where "noteId" = $1`;
+  const params = [noteId];
+  db.query(sql, params)
+    .then(result => res.status(201).json(result))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occured'
+      });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
