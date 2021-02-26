@@ -15,31 +15,20 @@ export default class Start extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.signup = this.signup.bind(this);
     this.accountOn = this.accountOn.bind(this);
+    this.signin = this.signin.bind(this);
+    this.testUser = this.testUser.bind(this);
   }
 
-  componentDidMount() {
-    const user = {
-      username: 'username',
-      password: 'password'
-    };
-
-    fetch('/api/newuser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
+  testUser() {
+    fetch('/api/users', {
+      method: 'GET'
     })
       .then(res => res.json())
-      .then(fetch('/api/users', {
-        method: 'GET'
-      })
-        .then(res => res.json())
-        .then(data => {
-          const userData = JSON.stringify(data);
-          localStorage.setItem('user-information', userData);
-        })
-      );
+      .then(data => {
+        console.log(data);
+        // const userData = JSON.stringify(data);
+        // localStorage.setItem('user-information', userData);
+      });
   }
 
   getUser() {
@@ -64,6 +53,28 @@ export default class Start extends React.Component {
           modal: false,
           account: true
         });
+      });
+  }
+
+  signin() {
+    const user = {
+      username: this.state.username,
+      nonhashedpassword: this.state.password
+    };
+    fetch('/api/sign-in', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => {
+        const userData = JSON.stringify(data.user.userId);
+        localStorage.setItem('user-information', userData);
+      })
+      .then(() => {
+        location.hash = '#home';
       });
   }
 
@@ -112,10 +123,10 @@ export default class Start extends React.Component {
         </div>
           <div className="d-flex justify-content-center">
             <button className="btn-sm lgreen text-demo mt-2 bhalf" onClick={this.signup}>Sign Up</button>
-            <button className="btn-sm lgreen text-demo mt-2 bhalf">Login</button>
+            <button className="btn-sm lgreen text-demo mt-2 bhalf" onClick={this.signin}>Login</button>
           </div>
       <div className="d-flex justify-content-center">
-        <a href="#home" className="bwidth"><button className="btn-sm lgreen text-two mt-2 width100" onClick={this.getUser}>Try it Out!</button></a>
+        <a href="#home" className="bwidth"><button className="btn-sm lgreen text-two mt-2 width100" onClick={this.testUser}>Try it Out!</button></a>
       </div>
       <div className="d-flex justify-content-center">
         <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.modalOn}>About Aim</button>

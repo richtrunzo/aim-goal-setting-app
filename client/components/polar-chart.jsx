@@ -22,7 +22,7 @@ export default class Polarchart extends React.Component {
 
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user-information'));
-    const userId = parseInt(user.userId);
+    const userId = parseInt(user);
     fetch(`/api/goals/${userId}`, {
       method: 'GET'
     })
