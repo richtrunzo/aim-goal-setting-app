@@ -56,17 +56,23 @@ export default class Start extends React.Component {
       <div className="mt-5">
         <p className="text-two text-center">Welcome to AIM<br></br>the app that tracks your goals</p>
       </div>
+      <form>
+        <div className="mb-3 d-flex justify-content-center">
+          <input type="text" className="bwidth border-0 rounded-start rounded-end" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" />
+        </div>
+        <div className="mb-3 d-flex justify-content-center">
+          <input type="password" className="bwidth border-0 rounded-start rounded-end" id="exampleInputPassword1" placeholder="Password" />
+        </div>
+          <div className="d-flex justify-content-center">
+            <button type="submit" className="btn-sm lgreen text-demo mt-2 bhalf">Sign Up</button>
+            <button type="submit" className="btn-sm lgreen text-demo mt-2 bhalf">Login</button>
+          </div>
+      </form>
       <div className="d-flex justify-content-center">
-        <a href="#home" className="bwidth"><button className="btn-sm lgreen text-two mt-2 width100" onClick={this.getUser}>Try it out!</button></a>
+        <a href="#home" className="bwidth"><button className="btn-sm lgreen text-two mt-2 width100" onClick={this.getUser}>Try it Out!</button></a>
       </div>
       <div className="d-flex justify-content-center">
         <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.modalOn}>About Aim</button>
-      </div>
-      <div className="d-flex justify-content-center">
-        <button className="btn-sm lgreen text-two mt-2 bwidth">Login</button>
-      </div>
-      <div className="d-flex justify-content-center">
-        <button className="btn-sm lgreen text-two mt-2 bwidth">Sign Up</button>
       </div>
    </div>;
   }
