@@ -26,9 +26,10 @@ export default class Start extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        // const userData = JSON.stringify(data);
-        // localStorage.setItem('user-information', userData);
-      });
+        const userData = JSON.stringify(data.userId);
+        localStorage.setItem('user-information', userData);
+      })
+      .then(() => { location.hash = '#home'; });
   }
 
   getUser() {
@@ -70,8 +71,10 @@ export default class Start extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         const userData = JSON.stringify(data.user.userId);
         localStorage.setItem('user-information', userData);
+        localStorage.setItem('token', data.token);
       })
       .then(() => {
         location.hash = '#home';
@@ -126,7 +129,7 @@ export default class Start extends React.Component {
             <button className="btn-sm lgreen text-demo mt-2 bhalf" onClick={this.signin}>Login</button>
           </div>
       <div className="d-flex justify-content-center">
-        <a href="#home" className="bwidth"><button className="btn-sm lgreen text-two mt-2 width100" onClick={this.testUser}>Try it Out!</button></a>
+        <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.testUser}>Try it Out!</button>
       </div>
       <div className="d-flex justify-content-center">
         <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.modalOn}>About Aim</button>
