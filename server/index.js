@@ -2,6 +2,8 @@ require('dotenv/config');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
+const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -36,6 +38,77 @@ app.post('/api/newuser', (req, res) => {
         error: 'an unexpected error occured'
       });
     });
+});
+
+app.post('/api/sign-up', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    res.status(400).json({
+      error: 'username and password are required inputs'
+    });
+  }
+  argon2.hash(password)
+    .then(hashed => {
+      const sql = `
+     insert into "users" ("userName", "password")
+     values ($1, $2)`;
+      const params = [username, hashed];
+      db.query(sql, params)
+        .then(result => {
+          res.status(201).json(result.rows);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'an unexpected error occured'
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'an unexpected error occured'
+          });
+        });
+    });
+});
+
+app.post('/api/sign-in', (req, res, next) => {
+  const { username, nonhashedpassword } = req.body;
+  if (!username || !nonhashedpassword) {
+    res.status(400).json({
+      error: 'username and password are required inputs'
+    });
+  }
+  const sql = `
+    select "userId",
+           "password"
+      from "users"
+     where "userName" = $1
+  `;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        res.status(400).json({
+          error: 'invalid login'
+        });
+      }
+      const { userId, password } = user;
+      return argon2
+        .verify(password, nonhashedpassword)
+        .then(isMatching => {
+          if (!isMatching) {
+            res.status(400).json({
+              error: 'invalid login'
+            });
+          }
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(err => next(err));
 });
 
 app.get('/api/users', (req, res) => {

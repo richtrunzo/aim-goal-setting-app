@@ -4,48 +4,114 @@ export default class Start extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      account: false,
+      username: null,
+      password: null
     };
     this.getUser = this.getUser.bind(this);
     this.modalOn = this.modalOn.bind(this);
     this.modalOff = this.modalOff.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.signup = this.signup.bind(this);
+    this.accountOn = this.accountOn.bind(this);
+    this.signin = this.signin.bind(this);
+    this.testUser = this.testUser.bind(this);
   }
 
-  componentDidMount() {
-    const user = {
-      username: 'username',
-      password: 'password'
-    };
-
-    fetch('/api/newuser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
+  testUser() {
+    fetch('/api/users', {
+      method: 'GET'
     })
       .then(res => res.json())
-      .then(fetch('/api/users', {
-        method: 'GET'
+      .then(data => {
+        const userData = JSON.stringify(data.userId);
+        localStorage.setItem('user-information', userData);
       })
-        .then(res => res.json())
-        .then(data => {
-          const userData = JSON.stringify(data);
-          localStorage.setItem('user-information', userData);
-        })
-      );
+      .then(() => { location.hash = '#home'; });
   }
 
   getUser() {
     location.hash = '#home';
   }
 
+  signup() {
+    if (this.state.username !== null && this.state.password !== null) {
+      const user = {
+        username: this.state.username,
+        password: this.state.password
+      };
+      fetch('/api/sign-up', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            username: null,
+            password: null,
+            modal: false,
+            account: true
+          });
+        });
+    }
+  }
+
+  signin() {
+    if (this.state.username !== null && this.state.password !== null) {
+      const user = {
+        username: this.state.username,
+        nonhashedpassword: this.state.password
+      };
+      fetch('/api/sign-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+        .then(res => res.json())
+        .then(data => {
+          const userData = JSON.stringify(data.user.userId);
+          localStorage.setItem('user-information', userData);
+          localStorage.setItem('token', data.token);
+        })
+        .then(() => {
+          location.hash = '#home';
+        });
+    }
+  }
+
+  onChange() {
+    if (event.target.id === 'username') {
+      this.setState({ username: event.target.value });
+    } else if (event.target.id === 'password') {
+      this.setState({ password: event.target.value });
+    }
+  }
+
   modalOn() {
-    this.setState({ modal: true });
+    this.setState({
+      modal: true,
+      account: false
+    });
+  }
+
+  accountOn() {
+    this.setState({
+      modal: false,
+      account: true
+    });
   }
 
   modalOff() {
-    this.setState({ modal: false });
+    this.setState({
+      modal: false,
+      account: false
+    });
   }
 
   startrender() {
@@ -56,11 +122,21 @@ export default class Start extends React.Component {
       <div className="mt-5">
         <p className="text-two text-center">Welcome to AIM<br></br>the app that tracks your goals</p>
       </div>
+        <div className="mb-3 d-flex justify-content-center">
+          <input type="text" className="bwidth border-0 rounded-start rounded-end" id="username" aria-describedby="emailHelp" placeholder="Username" onChange={this.onChange} />
+        </div>
+        <div className="mb-3 d-flex justify-content-center">
+          <input type="password" className="bwidth border-0 rounded-start rounded-end" id="password" placeholder="Password" onChange={this.onChange} minLength="8" required />
+        </div>
+          <div className="d-flex justify-content-center">
+            <button className="btn-sm lgreen text-demo mt-2 bhalf" onClick={this.signup}>Sign Up</button>
+            <button className="btn-sm lgreen text-demo mt-2 bhalf" onClick={this.signin}>Login</button>
+          </div>
       <div className="d-flex justify-content-center">
-        <a href="#home"><button className="btn-lg lgreen text mt-2" onClick={this.getUser}>Try it out!</button></a>
+        <button className="btn-sm lgreen text-demo mt-2 bwidth" onClick={this.testUser}>Try it Out!<br></br>No Login Required</button>
       </div>
       <div className="d-flex justify-content-center">
-        <button className="btn-lg lgreen text mt-5" onClick={this.modalOn}>About Aim</button>
+        <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.modalOn}>About Aim</button>
       </div>
    </div>;
   }
@@ -105,14 +181,48 @@ export default class Start extends React.Component {
       </div>
       </div>
       </>;
+  }
 
+  accountRender() {
+    return <>
+      <div className="mode"></div>
+      <div>
+        <div className="pt-3 pb-3 starting-header border-bottom border-dark border-2 black">
+          <h1 className="text text-center lgreen-text">AIM</h1>
+        </div>
+        <div className="mt-5">
+          <p className="text-two text-center">Welcome to AIM<br></br>the app that tracks your goals</p>
+        </div>
+        <div>
+          <button className="btn-lg position-absolute top-50 start-50 translate-middle lgreen text" onClick={this.getUser}>Try it out!</button>
+        </div>
+        <div>
+          <button className="btn-lg position-absolute top-50 start-50 translate-middle lgreen text" onClick={this.modalOn}>About AIM</button>
+        </div>
+      </div>
+      <div className="filterstart filter-fix">
+        <div>
+          <div className="d-flex justify-content-center">
+            <h2 className="text text-center mt-2">Account Created</h2>
+          </div>
+          <div className="d-flex justify-content-center">
+            <p className="text-center white-text mt-4 big-text">Your account has been successfully created, click the button below to return to the home screen and login.<br></br></p>
+          </div>
+          <div className="d-flex justify-content-center" >
+            <button className="btn-sm lgreen white-text mt-3 text" onClick={this.modalOff}>Login</button>
+          </div>
+        </div>
+      </div>
+    </>;
   }
 
   render() {
-    if (this.state.modal === false) {
+    if (this.state.modal === false && this.state.account === false) {
       return this.startrender();
-    } else {
+    } else if (this.state.modal === true && this.state.account === false) {
       return this.modalRender();
+    } else if (this.state.modal === false && this.state.account === true) {
+      return this.accountRender();
     }
   }
 

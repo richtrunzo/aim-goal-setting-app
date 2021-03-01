@@ -19,7 +19,7 @@ export default class Home extends React.Component {
   componentDidMount() {
     // WIll NEED CHANGED WHEN AUTH IS IMPLEMENTED
     const user = JSON.parse(localStorage.getItem('user-information'));
-    const userId = parseInt(user.userId);
+    const userId = parseInt(user);
     fetch(`/api/goals/${userId}`, {
       method: 'GET'
     })
@@ -71,7 +71,7 @@ export default class Home extends React.Component {
 
     // WIll NEED CHANGED WHEN AUTH IS IMPLEMENTED
     const user = JSON.parse(localStorage.getItem('user-information'));
-    const userId = parseInt(user.userId);
+    const userId = parseInt(user);
     fetch(`/api/goals/${userId}`, {
       method: 'GET'
     })

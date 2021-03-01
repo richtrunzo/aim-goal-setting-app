@@ -78,7 +78,7 @@ export default class Addgoal extends React.Component {
       const newGoal = {
         goalName: this.state.name,
         goalImage: this.state.image,
-        userId: userData.userId
+        userId: userData
       };
 
       fetch('/api/goals', {
