@@ -99,19 +99,16 @@ export default class Notes extends React.Component {
         .then(fetch('api/notes', { method: 'GET' })
           .then(res => res.json())
           .then(data => {
-            this.setState({ notes: data });
+            this.setState({
+              goals: this.state.goals,
+              notes: data,
+              addModal: false,
+              viewModal: false,
+              goalId: this.state.goalId,
+              note: this.state.note
+            });
           })
         );
-
-      this.setState({
-        goals: this.state.goals,
-        notes: [],
-        addModal: false,
-        viewModal: false,
-        goalId: this.state.goalId,
-        note: this.state.note
-      });
-
     }
   }
 
