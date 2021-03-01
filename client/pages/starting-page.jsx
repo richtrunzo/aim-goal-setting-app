@@ -25,7 +25,6 @@ export default class Start extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         const userData = JSON.stringify(data.userId);
         localStorage.setItem('user-information', userData);
       })
@@ -37,48 +36,53 @@ export default class Start extends React.Component {
   }
 
   signup() {
-    const user = {
-      username: this.state.username,
-      password: this.state.password
-    };
-    fetch('/api/sign-up', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          modal: false,
-          account: true
+    if (this.state.username !== null && this.state.password !== null) {
+      const user = {
+        username: this.state.username,
+        password: this.state.password
+      };
+      fetch('/api/sign-up', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            username: null,
+            password: null,
+            modal: false,
+            account: true
+          });
         });
-      });
+    }
   }
 
   signin() {
-    const user = {
-      username: this.state.username,
-      nonhashedpassword: this.state.password
-    };
-    fetch('/api/sign-in', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        const userData = JSON.stringify(data.user.userId);
-        localStorage.setItem('user-information', userData);
-        localStorage.setItem('token', data.token);
+    if (this.state.username !== null && this.state.password !== null) {
+      const user = {
+        username: this.state.username,
+        nonhashedpassword: this.state.password
+      };
+      fetch('/api/sign-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
       })
-      .then(() => {
-        location.hash = '#home';
-      });
+        .then(res => res.json())
+        .then(data => {
+          const userData = JSON.stringify(data.user.userId);
+          localStorage.setItem('user-information', userData);
+          localStorage.setItem('token', data.token);
+        })
+        .then(() => {
+          location.hash = '#home';
+        });
+    }
   }
 
   onChange() {
@@ -122,14 +126,14 @@ export default class Start extends React.Component {
           <input type="text" className="bwidth border-0 rounded-start rounded-end" id="username" aria-describedby="emailHelp" placeholder="Username" onChange={this.onChange} />
         </div>
         <div className="mb-3 d-flex justify-content-center">
-          <input type="password" className="bwidth border-0 rounded-start rounded-end" id="password" placeholder="Password" onChange={this.onChange} />
+          <input type="password" className="bwidth border-0 rounded-start rounded-end" id="password" placeholder="Password" onChange={this.onChange} minLength="8" required />
         </div>
           <div className="d-flex justify-content-center">
             <button className="btn-sm lgreen text-demo mt-2 bhalf" onClick={this.signup}>Sign Up</button>
             <button className="btn-sm lgreen text-demo mt-2 bhalf" onClick={this.signin}>Login</button>
           </div>
       <div className="d-flex justify-content-center">
-        <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.testUser}>Try it Out!</button>
+        <button className="btn-sm lgreen text-demo mt-2 bwidth" onClick={this.testUser}>Try it Out!<br></br>No Login Required</button>
       </div>
       <div className="d-flex justify-content-center">
         <button className="btn-sm lgreen text-two mt-2 bwidth" onClick={this.modalOn}>About Aim</button>
@@ -217,7 +221,7 @@ export default class Start extends React.Component {
       return this.startrender();
     } else if (this.state.modal === true && this.state.account === false) {
       return this.modalRender();
-    } else {
+    } else if (this.state.modal === false && this.state.account === true) {
       return this.accountRender();
     }
   }
