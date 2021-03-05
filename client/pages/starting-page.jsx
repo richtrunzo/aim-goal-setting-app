@@ -27,6 +27,10 @@ export default class Start extends React.Component {
       .then(data => {
         const userData = JSON.stringify(data.userId);
         localStorage.setItem('user-information', userData);
+        const token = localStorage.getItem('token');
+        if (token) {
+          localStorage.removeItem('token');
+        }
       })
       .then(() => { location.hash = '#home'; });
   }
