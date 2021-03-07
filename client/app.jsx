@@ -74,14 +74,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.user === null) {
-      return <Start />;
-    } else {
-      return (
+    return (
       <React.Fragment >
         {this.renderPage()}
       </React.Fragment >
-      );
-    }
+    );
   }
 }
